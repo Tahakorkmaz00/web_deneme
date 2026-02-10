@@ -1,0 +1,419 @@
+/* ========================================
+   PRACTICE MODE — REDESIGNED
+   ======================================== */
+
+/* Full Screen */
+.practice-screen {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0d0d0d 0%, #1a1a2e 50%, #0d0d0d 100%);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top Bar */
+.practice-topbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 24px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.back-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #aaa;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.back-btn:hover {
+    border-color: #ff6b35;
+    color: #ff6b35;
+}
+
+.topbar-info {
+    flex: 1;
+}
+
+.rhythm-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    color: #f0f0f0;
+    margin: 0 0 4px 0;
+}
+
+.rhythm-tags {
+    display: flex;
+    gap: 8px;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tag-feel {
+    background: rgba(0, 255, 159, 0.12);
+    color: #00ff9f;
+    border: 1px solid rgba(0, 255, 159, 0.2);
+}
+
+.tag-time {
+    background: rgba(255, 255, 255, 0.06);
+    color: #888;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Content */
+.practice-content {
+    flex: 1;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ---- METRONOME STRIP ---- */
+.metronome-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.bpm-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: #ccc;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bpm-btn:hover {
+    border-color: #ff6b35;
+    color: #ff6b35;
+    background: rgba(255, 107, 53, 0.08);
+}
+
+.bpm-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+}
+
+.bpm-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: #ff6b35;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(255, 107, 53, 0.4);
+}
+
+.bpm-label {
+    font-size: 0.7rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+/* ---- BEAT TRACK ---- */
+.beat-track {
+    display: grid;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+.beat-pip {
+    aspect-ratio: 1;
+    max-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: #555;
+    transition: all 0.15s ease;
+}
+
+.beat-pip.active {
+    border-color: #00ff9f;
+    background: rgba(0, 255, 159, 0.15);
+    color: #00ff9f;
+    box-shadow: 0 0 16px rgba(0, 255, 159, 0.3);
+    transform: scale(1.15);
+}
+
+.beat-pip.strong {
+    border-color: rgba(255, 107, 53, 0.3);
+    color: #ff6b35;
+}
+
+.beat-pip.strong.active {
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.15);
+    color: #ff6b35;
+    box-shadow: 0 0 16px rgba(255, 107, 53, 0.3);
+}
+
+/* ---- PLAY BUTTON ---- */
+.play-btn-main {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #ff6b35, #e55a28);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+}
+
+.play-btn-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(255, 107, 53, 0.4);
+}
+
+.play-btn-main.playing {
+    background: linear-gradient(135deg, #e55a28, #cc4a1e);
+}
+
+.play-icon {
+    font-size: 1.3rem;
+}
+
+/* ---- PATTERN STAGE ---- */
+.pattern-stage {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 32px 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.pattern-stage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.3), transparent);
+}
+
+.pattern-symbols {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+/* ---- STRUM SLOT ---- */
+.strum-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 8px;
+    min-width: 48px;
+    border-radius: 10px;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.strum-slot.active {
+    background: rgba(255, 107, 53, 0.12);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+}
+
+.strum-char {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ddd;
+    transition: all 0.15s ease;
+    line-height: 1;
+}
+
+.strum-slot.active .strum-char {
+    color: #ff6b35;
+    transform: scale(1.25);
+    text-shadow: 0 0 30px rgba(255, 107, 53, 0.8);
+}
+
+/* Rest: show ✕ in dim red */
+.strum-slot.rest .strum-char {
+    color: #ff4757;
+    opacity: 0.35;
+    font-size: 2rem;
+}
+
+.strum-slot.rest.active .strum-char {
+    opacity: 0.7;
+    color: #ff4757;
+    text-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
+}
+
+/* Mute: red */
+.strum-slot.mute .strum-char {
+    color: #ff4757;
+    font-weight: 800;
+}
+
+/* Accent: gold & larger */
+.strum-slot.accent .strum-char {
+    color: #ffa502;
+    font-weight: 900;
+    transform: scale(1.1);
+}
+
+.strum-beat {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    color: #555;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.strum-slot.active .strum-beat {
+    background: #ff6b35;
+    color: white;
+}
+
+/* ---- PRACTICE TIP ---- */
+.practice-tip {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: rgba(0, 255, 159, 0.04);
+    border-left: 3px solid #00ff9f;
+    padding: 14px 16px;
+    border-radius: 0 10px 10px 0;
+}
+
+.tip-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.practice-tip p {
+    color: #999;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ---- INFO CARDS ---- */
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 14px 16px;
+    transition: all 0.2s;
+}
+
+.info-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.info-card-label {
+    font-size: 0.75rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.info-card-value {
+    font-size: 1rem;
+    color: #eee;
+    font-weight: 600;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 600px) {
+    .practice-topbar {
+        padding: 12px 16px;
+    }
+
+    .rhythm-title {
+        font-size: 1.2rem;
+    }
+
+    .bpm-number {
+        font-size: 2.8rem;
+    }
+
+    .strum-char {
+        font-size: 2.2rem;
+    }
+
+    .strum-slot {
+        min-width: 36px;
+        padding: 8px 4px;
+    }
+
+    .pattern-stage {
+        padding: 24px 10px;
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .practice-content {
+        padding: 16px 12px 32px;
+    }
+}

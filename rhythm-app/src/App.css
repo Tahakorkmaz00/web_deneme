@@ -1,0 +1,280 @@
+@import './components/Header.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-dark: #0a0a0a;
+    --bg-card: #161616;
+    --accent-orange: #ff6b35;
+    --accent-green: #00ff9f;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --border-color: #2a2a2a;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.app {
+    position: relative;
+}
+
+.strum-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+    opacity: 0.15;
+}
+
+.strum-icon {
+    position: absolute;
+    font-size: 3rem;
+    color: var(--accent-orange);
+    animation: floatStrum 6s ease-in-out infinite;
+}
+
+.strum-icon:nth-child(1) {
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.strum-icon:nth-child(2) {
+    top: 20%;
+    right: 15%;
+    animation-delay: 1s;
+}
+
+.strum-icon:nth-child(3) {
+    bottom: 30%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+.strum-icon:nth-child(4) {
+    bottom: 15%;
+    right: 25%;
+    animation-delay: 3s;
+}
+
+.strum-icon:nth-child(5) {
+    top: 50%;
+    left: 5%;
+    animation-delay: 4s;
+}
+
+.strum-icon:nth-child(6) {
+    top: 60%;
+    right: 10%;
+    animation-delay: 5s;
+}
+
+@keyframes floatStrum {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(5deg);
+        opacity: 0.6;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    z-index: 10;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    cursor: pointer;
+}
+
+.tagline {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.how-it-works {
+    padding: 100px 0;
+    background: linear-gradient(180deg, transparent, rgba(255, 107, 53, 0.03), transparent);
+}
+
+.section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    margin-bottom: 64px;
+    letter-spacing: 1px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 48px;
+}
+
+.step {
+    text-align: center;
+    padding: 32px;
+    background: var(--bg-card);
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.step:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-orange);
+    box-shadow: 0 16px 48px rgba(255, 107, 53, 0.15);
+}
+
+.step-icon {
+    font-size: 3rem;
+    margin-bottom: 24px;
+    display: inline-block;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.step:nth-child(2) .step-icon {
+    animation-delay: 0.2s;
+}
+
+.step:nth-child(3) .step-icon {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.step h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.step p {
+    color: var(--text-secondary);
+}
+
+.why-section {
+    padding: 100px 0;
+    background: linear-gradient(180deg, transparent, rgba(0, 255, 159, 0.03), transparent);
+}
+
+.benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px;
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.benefit:hover {
+    border-color: var(--accent-green);
+    transform: translateX(8px);
+}
+
+.benefit-icon {
+    color: var(--accent-orange);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.benefit h3 {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.benefit p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+footer {
+    padding: 64px 0 32px;
+    border-top: 1px solid var(--border-color);
+}
+
+.disclaimer {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    padding: 32px 0;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+
+    .how-it-works,
+    .why-section {
+        padding: 60px 0;
+    }
+
+    .steps {
+        gap: 32px;
+    }
+}

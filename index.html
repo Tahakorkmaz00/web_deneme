@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StrumAI - AI-powered guitar rhythm patterns for any song. Get personalized strumming patterns instantly.">
+    <meta name="keywords" content="guitar, rhythm, strumming, AI, music learning">
+    <meta name="author" content="StrumAI">
+    <title>StrumAI - AI-Powered Guitar Rhythms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="strum-background">
+        <div class="strum-icon">↓</div>
+        <div class="strum-icon">↑</div>
+        <div class="strum-icon">↓</div>
+        <div class="strum-icon">↑</div>
+        <div class="strum-icon">↓</div>
+        <div class="strum-icon">↑</div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">StrumAI</div>
+                <div class="tagline">AI for Guitar Players</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>
+                Type the song you want to play.<br>
+                Get the <span class="highlight">rhythm instantly.</span>
+            </h1>
+            <p class="subtitle">
+                AI-powered guitar strumming patterns tailored to the song you choose.
+            </p>
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="Enter a song name (e.g. Duman – Senden Daha Güzel)"
+                    id="songInput"
+                >
+            </div>
+            <button class="cta-button" onclick="showRhythm()">Show Me the Rhythm</button>
+            
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p class="loading-text">Analyzing rhythm...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">🎵</div>
+                    <h3>Type the Song Name</h3>
+                    <p>Just enter the song you want to play. Any song, any artist.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🤖</div>
+                    <h3>Let AI Analyze the Vibe</h3>
+                    <p>Our AI understands the mood, tempo, and energy of your song.</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">🎸</div>
+                    <h3>Play and Feel the Groove</h3>
+                    <p>Get a strumming pattern that makes your song flow perfectly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="rhythm-preview">
+        <div class="container">
+            <h2 class="section-title">Rhythm Preview</h2>
+            <div class="preview-card">
+                <div class="song-info">
+                    <h3 class="song-title">Duman – Senden Daha Güzel</h3>
+                    <p class="tempo">Estimated Tempo: 92 BPM</p>
+                </div>
+                
+                <div class="pattern-display">
+                    <span class="strum">↓</span>
+                    <span class="strum">↓↑</span>
+                    <span class="strum">↓↑</span>
+                </div>
+                
+                <div class="speed-controls">
+                    <button class="speed-btn" onclick="changeSpeed('slow')">Slow</button>
+                    <button class="speed-btn active" onclick="changeSpeed('normal')">Normal</button>
+                    <button class="speed-btn" onclick="changeSpeed('fast')">Fast</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-section">
+        <div class="container">
+            <h2 class="section-title">Why StrumAI?</h2>
+            <div class="benefits">
+                <div class="benefit">
+                    <div class="benefit-icon">🎼</div>
+                    <div>
+                        <h3>More Musical Than a Metronome</h3>
+                        <p>Feel the rhythm in context, not just the beat.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">⏱️</div>
+                    <div>
+                        <h3>No More Endless Searching</h3>
+                        <p>Skip hours of YouTube tutorials. Get your pattern instantly.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">💬</div>
+                    <div>
+                        <h3>Guitarist-Friendly Language</h3>
+                        <p>We speak your language. No confusing music theory.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🌱</div>
+                    <div>
+                        <h3>Perfect for Beginners</h3>
+                        <p>Start playing songs you love, from day one.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">📱</div>
+                    <div>
+                        <h3>Share Your Progress</h3>
+                        <p>Show your friends what you're learning on social media.</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">🎯</div>
+                    <div>
+                        <h3>Song-Specific Patterns</h3>
+                        <p>Every song gets a unique rhythm that captures its essence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-proof">
+        <div class="container">
+            <h2 class="section-title">Players Love It</h2>
+            <div class="proof-container">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="play-icon">▶</div>
+                        <p style="color: var(--text-secondary); font-style: italic;">
+                            "This rhythm was suggested by AI"
+                        </p>
+                        <p style="margin-top: 16px; color: var(--accent-green); font-weight: 700;">
+                            This song finally flows
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="testimonials">
+                    <div class="testimonial">
+                        <p>"I've been struggling with this song for weeks. StrumAI gave me the pattern in seconds and now it sounds amazing!"</p>
+                        <div class="author">— Sarah, beginner guitarist</div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"Finally, an app that understands what guitarists actually need. Not just tabs, but the feel of the song."</p>
+                        <div class="author">— Miguel, 3 years playing</div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"My students love it. They can practice at different speeds and actually feel like they're playing the real song."</p>
+                        <div class="author">— Alex, guitar teacher</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <div class="container">
+            <h2>What song do you want to play?</h2>
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="Enter a song name..."
+                    id="songInput2"
+                >
+            </div>
+            <button class="cta-button" onclick="showRhythm()">Try It Now</button>
+        </div>
+    </section>
+
+    <!-- Practice Screen (Hidden by default) -->
+    <section class="practice-screen" id="practiceScreen" style="display: none;">
+        <div class="container">
+            <button class="back-button" onclick="exitPractice()">
+                ← Back to Results
+            </button>
+            
+            <div class="practice-card">
+                <div class="practice-header">
+                    <h2 id="practiceSongTitle" class="song-title"></h2>
+                    <p id="practiceStyleLabel" style="color: var(--accent-green); font-weight: 700; font-size: 1.125rem;"></p>
+                </div>
+
+                <div class="practice-pattern">
+                    <div id="practicePatternDisplay" class="pattern-display"></div>
+                </div>
+
+                <div class="practice-tip" id="practiceTip">
+                    Start slow
+                </div>
+
+                <div class="metronome-controls">
+                    <div class="bpm-control">
+                        <button class="bpm-btn" onclick="adjustBPM(-5)">−</button>
+                        <div class="bpm-display">
+                            <span id="currentBPM" style="font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--accent-orange);">92</span>
+                            <span style="color: var(--text-secondary); font-size: 1rem; display: block; margin-top: -8px;">BPM</span>
+                        </div>
+                        <button class="bpm-btn" onclick="adjustBPM(5)">+</button>
+                    </div>
+
+                    <button class="play-pause-btn" id="playPauseBtn" onclick="toggleMetronome()">
+                        <span id="playPauseIcon">▶</span> <span id="playPauseText">Start Practice</span>
+                    </button>
+                </div>
+
+                <div class="beat-indicator">
+                    <div class="beat" data-beat="1">1</div>
+                    <div class="beat" data-beat="2">2</div>
+                    <div class="beat" data-beat="3">3</div>
+                    <div class="beat" data-beat="4">4</div>
+                </div>
+
+                <div class="practice-tips-list">
+                    <div class="tip-item" id="tip1">💡 Accent the downbeat</div>
+                    <div class="tip-item" id="tip2">💡 Relax your strumming hand</div>
+                    <div class="tip-item" id="tip3">💡 Keep your wrist loose</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>StrumAI</h4>
+                    <p style="color: var(--text-secondary);">AI-powered guitar rhythms for the songs you love.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                        <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+                        <a href="#" class="social-link" aria-label="YouTube">▶️</a>
+                        <a href="#" class="social-link" aria-label="TikTok">🎵</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 2;">
+                        How It Works<br>
+                        Pricing<br>
+                        FAQ<br>
+                        Support
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 2;">
+                        About Us<br>
+                        Blog<br>
+                        Contact<br>
+                        Privacy Policy
+                    </p>
+                </div>
+            </div>
+            
+            <div class="disclaimer">
+                <p>This app does not provide exact copies of original songs. It suggests rhythm patterns inspired by the song's style. All patterns are AI-generated interpretations designed to help you learn and play guitar.</p>
+                <p style="margin-top: 16px;">© 2024 StrumAI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

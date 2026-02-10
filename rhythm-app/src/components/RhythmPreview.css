@@ -1,0 +1,181 @@
+.rhythm-preview {
+    padding: 100px 0;
+}
+
+.preview-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border-radius: 32px;
+    padding: 48px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+}
+
+.song-info {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.song-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.tempo {
+    color: var(--accent-green);
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.pattern-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin: 48px 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    letter-spacing: 8px;
+}
+
+.strum {
+    display: inline-block;
+    animation: strumPulse 1.2s ease-in-out infinite;
+}
+
+.strum.speed-slow {
+    animation-duration: 2s;
+}
+
+.strum.speed-normal {
+    animation-duration: 1.2s;
+}
+
+.strum.speed-fast {
+    animation-duration: 0.8s;
+}
+
+@keyframes strumPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+.speed-controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.speed-btn {
+    padding: 12px 32px;
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.speed-btn:hover,
+.speed-btn.active {
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+    background: rgba(255, 107, 53, 0.1);
+}
+
+.rhythm-option-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.rhythm-option-btn.active {
+    background: rgba(255, 107, 53, 0.2);
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+}
+
+.rhythm-option-btn:hover {
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+}
+
+.select-rhythm-btn {
+    background: linear-gradient(135deg, var(--accent-green), #00d68f);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 24px rgba(0, 255, 159, 0.3);
+}
+
+.select-rhythm-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 255, 159, 0.4);
+}
+
+.select-rhythm-btn:active {
+    transform: translateY(0);
+}
+
+.section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    margin-bottom: 64px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .rhythm-preview {
+        padding: 60px 0;
+    }
+
+    .preview-card {
+        padding: 32px 24px;
+    }
+
+    .pattern-display {
+        font-size: 3rem;
+        gap: 16px;
+    }
+
+    .speed-controls {
+        flex-direction: column;
+    }
+
+    .speed-btn {
+        width: 100%;
+    }
+}

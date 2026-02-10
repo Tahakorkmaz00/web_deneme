@@ -1,0 +1,72 @@
+/* Header styles update */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.login-btn {
+    background: transparent;
+    border: 2px solid var(--accent-orange);
+    color: var(--accent-orange);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.login-btn:hover {
+    background: var(--accent-orange);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-name {
+    color: var(--accent-green);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.logout-btn:hover {
+    border-color: var(--accent-orange);
+    color: var(--accent-orange);
+}
+
+@media (max-width: 768px) {
+    .user-name {
+        font-size: 0.9rem;
+    }
+
+    .login-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}

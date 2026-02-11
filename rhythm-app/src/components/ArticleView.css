@@ -1,0 +1,447 @@
+.article-page {
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+}
+
+.article-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Article Content */
+.article-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.article-header-section {
+    padding: 48px 40px 32px;
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(180deg, rgba(255, 107, 53, 0.04) 0%, transparent 100%);
+}
+
+.article-big-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.article-header-section h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--article-accent), var(--text-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.article-body {
+    padding: 40px;
+}
+
+.article-h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    color: var(--article-accent);
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.article-h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 24px 0 12px;
+}
+
+.article-paragraph {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.article-list-item {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding-left: 20px;
+    margin-bottom: 4px;
+}
+
+.article-list-item.numbered {
+    padding-left: 8px;
+}
+
+.article-code {
+    background: #0d0d0d;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 16px 0;
+    overflow-x: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    color: var(--accent-green);
+}
+
+/* Comments Section */
+.comments-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 40px;
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.comments-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+}
+
+.comment-count {
+    background: rgba(255, 107, 53, 0.1);
+    color: var(--accent-orange);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* New Comment Form */
+.new-comment-form {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.comment-form-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.form-avatar {
+    font-size: 1.3rem;
+}
+
+.form-username {
+    font-weight: 600;
+    color: var(--accent-orange);
+}
+
+.form-field {
+    margin-bottom: 16px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.required {
+    color: var(--accent-orange);
+}
+
+.rhythm-input,
+.message-input {
+    width: 100%;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+    resize: vertical;
+}
+
+.rhythm-input:focus,
+.message-input:focus {
+    outline: none;
+    border-color: var(--accent-orange);
+}
+
+.rhythm-input {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+.submit-comment-btn {
+    background: linear-gradient(135deg, #ff6b35, #ff3366);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.submit-comment-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+}
+
+.submit-comment-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Login Prompt */
+.login-prompt {
+    text-align: center;
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border-color);
+    border-radius: 16px;
+    margin-bottom: 32px;
+}
+
+.login-prompt p {
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.login-prompt-btn {
+    background: linear-gradient(135deg, #ff6b35, #ff3366);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.login-prompt-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+}
+
+/* Comments List */
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.no-comments {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-secondary);
+}
+
+.no-comments span {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.comment-thread {
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.comment-item {
+    padding: 20px 24px;
+}
+
+.comment-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.comment-avatar {
+    font-size: 1.1rem;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+.comment-date {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.comment-rhythm {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(255, 107, 53, 0.06);
+    border: 1px solid rgba(255, 107, 53, 0.15);
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.rhythm-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.rhythm-value {
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    color: var(--accent-orange);
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.comment-message {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.reply-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 4px 0;
+    transition: color 0.2s;
+}
+
+.reply-btn:hover {
+    color: var(--accent-orange);
+}
+
+/* Replies */
+.replies-list {
+    border-top: 1px solid var(--border-color);
+    padding-left: 32px;
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.reply-item {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.reply-item:first-child {
+    border-top: none;
+}
+
+/* Reply Form */
+.reply-form {
+    padding: 16px 24px 16px 56px;
+    border-top: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.reply-input {
+    width: 100%;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: inherit;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+
+.reply-input:focus {
+    outline: none;
+    border-color: var(--accent-orange);
+}
+
+.reply-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.cancel-reply-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancel-reply-btn:hover {
+    border-color: var(--text-secondary);
+}
+
+.send-reply-btn {
+    background: var(--accent-orange);
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.send-reply-btn:hover:not(:disabled) {
+    background: #ff5722;
+}
+
+.send-reply-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .article-header-section {
+        padding: 32px 24px 24px;
+    }
+
+    .article-body {
+        padding: 24px;
+    }
+
+    .comments-section {
+        padding: 24px;
+    }
+
+    .replies-list {
+        padding-left: 16px;
+    }
+
+    .reply-form {
+        padding-left: 32px;
+    }
+}

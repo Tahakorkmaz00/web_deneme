@@ -1,0 +1,349 @@
+.create-rhythm-page {
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+}
+
+.create-container {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.create-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.create-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.create-header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #00ff9f, #00c9ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+}
+
+.create-header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* Form */
+.create-form {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 40px;
+}
+
+.form-group {
+    margin-bottom: 28px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.form-input {
+    width: 100%;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--accent-green);
+}
+
+.strum-input {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+}
+
+.strum-helpers {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.helper-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.strum-btn {
+    background: rgba(0, 255, 159, 0.08);
+    border: 1px solid rgba(0, 255, 159, 0.2);
+    color: var(--accent-green);
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.strum-btn:hover {
+    background: rgba(0, 255, 159, 0.15);
+}
+
+.strum-btn.clear {
+    background: rgba(255, 107, 53, 0.08);
+    border-color: rgba(255, 107, 53, 0.2);
+    color: var(--accent-orange);
+    font-size: 0.8rem;
+}
+
+/* BPM Control */
+.bpm-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bpm-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bpm-btn:hover {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+.bpm-input {
+    width: 80px;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 10px;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: 700;
+    font-family: inherit;
+}
+
+.bpm-input:focus {
+    outline: none;
+    border-color: var(--accent-green);
+}
+
+/* Add Chord Row */
+.add-chord-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.chord-select {
+    flex: 1;
+    min-width: 180px;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.chord-select:focus {
+    outline: none;
+    border-color: var(--accent-green);
+}
+
+.chord-select option {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+}
+
+.repeat-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.repeat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.repeat-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.repeat-btn:hover {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+.repeat-value {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--accent-green);
+    min-width: 24px;
+    text-align: center;
+}
+
+.add-chord-btn {
+    background: var(--accent-green);
+    color: #0a0a0a;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.add-chord-btn:hover:not(:disabled) {
+    box-shadow: 0 4px 16px rgba(0, 255, 159, 0.3);
+}
+
+.add-chord-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Chord Sequence */
+.chord-sequence {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chord-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(0, 255, 159, 0.06);
+    border: 1px solid rgba(0, 255, 159, 0.15);
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.chord-index {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.chord-name {
+    font-weight: 700;
+    color: var(--accent-green);
+    font-size: 0.95rem;
+}
+
+.chord-repeat {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.remove-chord-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 2px;
+    transition: color 0.2s;
+    opacity: 0.6;
+}
+
+.remove-chord-btn:hover {
+    color: #ff3366;
+    opacity: 1;
+}
+
+/* Publish Button */
+.publish-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #00ff9f, #00c9ff);
+    color: #0a0a0a;
+    border: none;
+    padding: 16px;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 8px;
+}
+
+.publish-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 255, 159, 0.3);
+}
+
+.publish-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .create-form {
+        padding: 24px;
+    }
+
+    .add-chord-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .repeat-control {
+        justify-content: center;
+    }
+}

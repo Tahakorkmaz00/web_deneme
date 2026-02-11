@@ -18,7 +18,7 @@ export default function Login({ onLogin, onClose }) {
                 <div className="login-container">
                     <div className="login-header">
                         <div className="logo-large">StrumFlow</div>
-                        <p className="login-subtitle">Rhythm Exercise Metronome</p>
+                        <p className="login-subtitle">Gitar Topluluğu & Ritim Kütüphanesi</p>
                     </div>
 
                     <form className="login-form" onSubmit={handleSubmit}>
@@ -40,9 +40,9 @@ export default function Login({ onLogin, onClose }) {
                     </form>
 
                     <div className="login-features">
-                        <div className="feature-item">🎸 Rhythm Exercises</div>
-                        <div className="feature-item">🎵 Interactive Metronome</div>
-                        <div className="feature-item">📈 Track Your Progress</div>
+                        <div className="feature-item">📚 Teknik Makaleler</div>
+                        <div className="feature-item">🎸 Ritim Kütüphanesi</div>
+                        <div className="feature-item">🥁 Gelişmiş Metronom</div>
                     </div>
                 </div>
             </div>

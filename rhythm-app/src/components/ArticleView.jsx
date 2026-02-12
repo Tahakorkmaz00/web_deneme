@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { articles, getCommentsByArticle, addComment, addReply } from '../utils/dataStore';
+import { getAllArticles, getCommentsByArticle, addComment, addReply, addXP, deleteArticle } from '../utils/dataStore';
+import YouTubeEmbed from './YouTubeEmbed';
 import './ArticleView.css';
 
-export default function ArticleView({ articleId, isLoggedIn, username, onBack, onRequestLogin }) {
-    const article = articles.find((a) => a.id === articleId);
+export default function ArticleView({ articleId, isLoggedIn, username, onBack, onRequestLogin, onNavigate }) {
+    const [article, setArticle] = useState(null);
     const [comments, setComments] = useState([]);
     const [newRhythm, setNewRhythm] = useState('');
     const [newMessage, setNewMessage] = useState('');
@@ -11,12 +12,24 @@ export default function ArticleView({ articleId, isLoggedIn, username, onBack, o
     const [replyText, setReplyText] = useState('');
 
     useEffect(() => {
-        if (article) {
-            setComments(getCommentsByArticle(article.id));
+        const all = getAllArticles();
+        const found = all.find(a => a.id === articleId);
+        if (found) {
+            setArticle(found);
+            setComments(getCommentsByArticle(found.id));
         }
-    }, [article]);
+    }, [articleId]);
 
-    if (!article) return <div className="article-not-found">Makale bulunamadı.</div>;
+    const handleDelete = () => {
+        if (window.confirm('Bu makaleyi silmek istediğinize emin misiniz?')) {
+            deleteArticle(article.id);
+            onBack(); // Return to education page
+        }
+    };
+
+    const handleEdit = () => {
+        onNavigate('edit-article', { article: article });
+    };
 
     const handleSubmitComment = (e) => {
         e.preventDefault();
@@ -30,6 +43,12 @@ export default function ArticleView({ articleId, isLoggedIn, username, onBack, o
         });
 
         if (comment) {
+            // Gamification: Add 10 XP
+            const result = addXP(10);
+            if (result.leveledUp) {
+                alert(`🎉 TEBRİKLER!\nSeviye Atladın: ${result.newLevel}`);
+            }
+
             setComments(getCommentsByArticle(article.id));
             setNewRhythm('');
             setNewMessage('');
@@ -107,20 +126,36 @@ export default function ArticleView({ articleId, isLoggedIn, username, onBack, o
         return elements;
     };
 
+    if (!article) return <div className="loading">Yükleniyor...</div>;
+
     return (
         <section className="article-page">
             <div className="article-container">
-                <button className="back-btn" onClick={onBack}>
-                    ← Eğitime Dön
-                </button>
 
                 {/* Article Content */}
                 <article className="article-content" style={{ '--article-accent': article.color }}>
                     <div className="article-header-section">
-                        <span className="article-big-icon">{article.icon}</span>
+                        <div className="article-header-top">
+                            <span className="article-big-icon">{article.icon}</span>
+                            {/* Author Actions */}
+                            {username === article.author && (
+                                <div className="author-actions">
+                                    <button className="edit-btn" onClick={handleEdit}>✏️ Düzenle</button>
+                                    <button className="delete-btn" onClick={handleDelete}>🗑️ Sil</button>
+                                </div>
+                            )}
+                        </div>
                         <h1>{article.title}</h1>
+                        <div className="article-meta-info">
+                            <span>👤 {article.author}</span>
+                            <span>📅 {new Date(article.createdAt).toLocaleDateString('tr-TR')}</span>
+                        </div>
                     </div>
+
                     <div className="article-body">
+                        {/* YouTube Embed */}
+                        <YouTubeEmbed url={article.youtubeUrl} title={article.title} />
+
                         {renderContent(article.content)}
                     </div>
                 </article>

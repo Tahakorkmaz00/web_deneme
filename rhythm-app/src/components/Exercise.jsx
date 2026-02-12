@@ -139,9 +139,6 @@ export default function Exercise({ rhythm, onBack }) {
     return (
         <section className="exercise-page">
             <div className="exercise-container">
-                <button className="back-btn" onClick={() => { handleReset(); onBack(); }}>
-                    ← Ritme Dön
-                </button>
 
                 <div className="exercise-header">
                     <h1>🎯 Egzersiz Modu</h1>

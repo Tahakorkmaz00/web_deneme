@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getRhythmById, deleteRhythm } from '../utils/dataStore';
+import { getRhythmById, deleteRhythm, addXP } from '../utils/dataStore';
+import YouTubeEmbed from './YouTubeEmbed';
 import './RhythmDetail.css';
 
 export default function RhythmDetail({ rhythmId, username, onBack, onExercise, onDeleted }) {
@@ -15,7 +16,6 @@ export default function RhythmDetail({ rhythmId, username, onBack, onExercise, o
         return (
             <section className="rhythm-detail-page">
                 <div className="detail-container">
-                    <button className="back-btn" onClick={onBack}>← Kütüphaneye Dön</button>
                     <div className="not-found">Ritim bulunamadı.</div>
                 </div>
             </section>
@@ -37,9 +37,6 @@ export default function RhythmDetail({ rhythmId, username, onBack, onExercise, o
     return (
         <section className="rhythm-detail-page">
             <div className="detail-container">
-                <button className="back-btn" onClick={onBack}>
-                    ← Kütüphaneye Dön
-                </button>
 
                 <div className="detail-card">
                     {/* Header */}
@@ -57,6 +54,9 @@ export default function RhythmDetail({ rhythmId, username, onBack, onExercise, o
                         )}
                     </div>
 
+                    {/* YouTube Embed */}
+                    <YouTubeEmbed url={rhythm.youtubeUrl} title={rhythm.title} />
+
                     {/* Strum Pattern */}
                     <div className="detail-section">
                         <h2>🎵 Ritim Kalıbı</h2>
@@ -70,7 +70,7 @@ export default function RhythmDetail({ rhythmId, username, onBack, onExercise, o
                         <h2>🎸 Akor Sıralaması</h2>
                         <div className="chord-progression">
                             {rhythm.chords.map((chord, index) => (
-                                <div key={index} className="progression-item">
+                                <div key={index} className="progression-item" style={{ '--pi': index }}>
                                     <span className="prog-number">{index + 1}</span>
                                     <div className="prog-info">
                                         <span className="prog-chord">{chord.name}</span>

@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Login from './components/Login';
 import HomeScreen from './components/HomeScreen';
 import Education from './components/Education';
 import ArticleView from './components/ArticleView';
 import Library from './components/Library';
 import CreateRhythm from './components/CreateRhythm';
+import CreateArticle from './components/CreateArticle';
 import RhythmDetail from './components/RhythmDetail';
 import Exercise from './components/Exercise';
+import ChordLibrary from './components/ChordLibrary';
 import './App.css';
 
 function App() {
@@ -16,6 +18,18 @@ function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [pageData, setPageData] = useState({});
   const [exerciseRhythm, setExerciseRhythm] = useState(null);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('strumflow_theme') || 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('strumflow_theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const handleLogin = (name) => {
     setUsername(name);
@@ -54,7 +68,7 @@ function App() {
           />
         );
 
-      case 'article':
+      case 'article-view':
         return (
           <ArticleView
             articleId={pageData.articleId}
@@ -62,6 +76,29 @@ function App() {
             username={username}
             onBack={() => navigateTo('education')}
             onRequestLogin={() => setShowLoginModal(true)}
+            onNavigate={navigateTo}
+          />
+        );
+
+      case 'chords':
+        return <ChordLibrary onBack={goHome} />;
+
+      case 'create-article':
+        return (
+          <CreateArticle
+            username={username}
+            onBack={() => navigateTo('education')}
+            onCreated={(article) => navigateTo('article-view', { articleId: article.id })}
+          />
+        );
+
+      case 'edit-article':
+        return (
+          <CreateArticle
+            username={username}
+            onBack={() => navigateTo('article-view', { articleId: pageData.article.id })}
+            onCreated={(updatedArticle) => navigateTo('article-view', { articleId: updatedArticle.id })}
+            initialData={pageData.article}
           />
         );
 
@@ -111,6 +148,29 @@ function App() {
     }
   };
 
+  const getBackHandler = () => {
+    switch (currentPage) {
+      case 'education':
+      case 'chords':
+      case 'library':
+        return goHome;
+      case 'article-view':
+      case 'create-article':
+        return () => navigateTo('education');
+      case 'edit-article':
+        return () => navigateTo('article-view', { articleId: pageData.article?.id });
+      case 'create':
+      case 'rhythm-detail':
+        return () => navigateTo('library');
+      case 'exercise':
+        return () => navigateTo('rhythm-detail', { rhythmId: exerciseRhythm?.id });
+      default:
+        return null;
+    }
+  };
+
+  const backAction = getBackHandler();
+
   return (
     <div className="app">
       {/* Animated background */}
@@ -132,9 +192,18 @@ function App() {
                   🏠 Ana Sayfa
                 </button>
               )}
+              <button
+                className="theme-toggle"
+                onClick={toggleTheme}
+                title={theme === 'dark' ? 'Aydınlık Mod' : 'Karanlık Mod'}
+              >
+                <span className="theme-icon">
+                  {theme === 'dark' ? '☀️' : '🌙'}
+                </span>
+              </button>
               {isLoggedIn ? (
                 <div className="user-profile">
-                  <span className="user-name">👋 {username}</span>
+                  <span className="user-name">{username}</span>
                   <button className="logout-btn" onClick={handleLogout}>Çıkış</button>
                 </div>
               ) : (
@@ -153,7 +222,16 @@ function App() {
       )}
 
       {/* Main Content */}
-      {renderPage()}
+      <div key={currentPage} className="page-enter">
+        {renderPage()}
+      </div>
+
+      {/* Global Sticky Back Button */}
+      {backAction && (
+        <button className="sticky-back-btn" onClick={backAction}>
+          ← Geri Dön
+        </button>
+      )}
     </div>
   );
 }

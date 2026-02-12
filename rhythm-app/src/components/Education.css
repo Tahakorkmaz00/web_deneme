@@ -10,24 +10,6 @@
     z-index: 1;
 }
 
-.back-btn {
-    background: none;
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    padding: 10px 20px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-    margin-bottom: 32px;
-}
-
-.back-btn:hover {
-    border-color: var(--accent-orange);
-    color: var(--accent-orange);
-    background: rgba(255, 107, 53, 0.05);
-}
-
 .edu-header {
     text-align: center;
     margin-bottom: 48px;
@@ -37,10 +19,10 @@
     font-size: 3rem;
     display: block;
     margin-bottom: 16px;
-    animation: iconBounce 2s ease-in-out infinite;
+    animation: eduBounce 2s ease-in-out infinite;
 }
 
-@keyframes iconBounce {
+@keyframes eduBounce {
 
     0%,
     100% {
@@ -56,7 +38,7 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 3rem;
     letter-spacing: 3px;
-    background: linear-gradient(135deg, #ff6b35, #ff3366);
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -84,12 +66,23 @@
     cursor: pointer;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(16px);
+    animation: articleFadeIn 0.5s ease-out forwards;
+    animation-delay: calc(var(--article-i, 0) * 0.1s);
+}
+
+@keyframes articleFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .article-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) !important;
     border-color: var(--card-accent);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 40px var(--shadow-color);
 }
 
 .article-card-accent {
@@ -113,6 +106,11 @@
 .article-icon {
     font-size: 2.5rem;
     margin-bottom: 16px;
+    transition: transform 0.3s;
+}
+
+.article-card:hover .article-icon {
+    transform: scale(1.1) rotate(-5deg);
 }
 
 .article-card-body h2 {
@@ -178,4 +176,43 @@
     .article-card-body {
         padding: 24px 24px 24px 28px;
     }
+}
+
+/* Add Article Button */
+.edu-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+}
+
+.add-article-btn {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+    border: none;
+    border-radius: 14px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 0.3px;
+}
+
+.add-article-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255, 107, 53, 0.35);
+}
+
+/* Author Tag */
+.article-author-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: var(--input-bg);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-color);
 }

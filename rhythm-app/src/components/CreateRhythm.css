@@ -59,19 +59,20 @@
 
 .form-input {
     width: 100%;
-    background: var(--bg-dark);
+    background: var(--input-bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 14px 16px;
     color: var(--text-primary);
     font-size: 0.95rem;
     font-family: inherit;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-input:focus {
     outline: none;
     border-color: var(--accent-green);
+    box-shadow: 0 0 0 3px rgba(0, 255, 159, 0.08);
 }
 
 .strum-input {
@@ -272,7 +273,7 @@
 .chord-index {
     font-size: 0.7rem;
     color: var(--text-secondary);
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--input-bg);
     width: 20px;
     height: 20px;
     display: flex;

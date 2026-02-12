@@ -38,9 +38,6 @@ export default function Library({ onNavigate, onBack, isLoggedIn, onRequestLogin
     return (
         <section className="library-page">
             <div className="library-container">
-                <button className="back-btn" onClick={onBack}>
-                    ← Ana Sayfa
-                </button>
 
                 <div className="library-header">
                     <span className="library-header-icon">🎸</span>
@@ -80,11 +77,12 @@ export default function Library({ onNavigate, onBack, isLoggedIn, onRequestLogin
                             }</p>
                         </div>
                     ) : (
-                        rhythms.map((rhythm) => (
+                        rhythms.map((rhythm, idx) => (
                             <div
                                 key={rhythm.id}
                                 className="rhythm-card"
                                 onClick={() => onNavigate('rhythm-detail', { rhythmId: rhythm.id })}
+                                style={{ '--ri': idx }}
                             >
                                 <div className="rhythm-card-left">
                                     <h3>{rhythm.title}</h3>

@@ -1,225 +1,734 @@
+/* ==============================
+   LOGIN MODAL — Premium Guitar Theme
+   ============================== */
+
+/* Overlay */
 .login-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 24px;
     z-index: 1000;
-    animation: fadeIn 0.3s ease-out;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+.login-modal-overlay.visible {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
 }
 
+/* Modal Content */
 .login-modal-content {
     position: relative;
-    background: linear-gradient(135deg, #0a0a0a 0%, #161616 100%);
-    position: relative;
-    overflow: hidden;
-}
-
-.login-screen::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-    animation: rotate 20s linear infinite;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.login-container {
-    position: relative;
-    z-index: 1;
-    max-width: 450px;
+    max-width: 480px;
     width: 100%;
-    background: var(--bg-card);
+    background: linear-gradient(165deg, #0d0d12 0%, #141420 40%, #0f0f18 100%);
     border-radius: 32px;
-    padding: 48px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
-    animation: slideUp 0.6s ease-out;
+    padding: 48px 40px;
+    border: 1px solid rgba(255, 107, 53, 0.12);
+    box-shadow:
+        0 32px 80px rgba(0, 0, 0, 0.7),
+        0 0 60px rgba(255, 107, 53, 0.06),
+        inset 0 1px 0 var(--card-border);
+    overflow: hidden;
+    transform: translateY(40px) scale(0.95);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.login-modal-content.visible {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+/* ===== Floating Music Notes ===== */
+.floating-notes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.floating-note {
+    position: absolute;
+    bottom: -30px;
+    font-size: 1.4rem;
+    opacity: 0;
+    left: var(--x-start);
+    animation: floatUp var(--duration) var(--delay) ease-out infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg) scale(0.5);
+    }
+
+    15% {
+        opacity: 0.6;
+        transform: translateY(-60px) rotate(15deg) scale(1);
+    }
+
+    85% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-420px) rotate(-20deg) scale(0.3);
+        left: var(--x-end);
+    }
+}
+
+/* ===== Glow Orbs ===== */
+.glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.orb-1 {
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 107, 53, 0.12);
+    top: -60px;
+    right: -40px;
+    animation: orbFloat 6s ease-in-out infinite;
+}
+
+.orb-2 {
+    width: 150px;
+    height: 150px;
+    background: rgba(0, 255, 159, 0.08);
+    bottom: -30px;
+    left: -30px;
+    animation: orbFloat 8s ease-in-out infinite reverse;
+}
+
+.orb-3 {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 51, 102, 0.1);
+    top: 40%;
+    left: 50%;
+    animation: orbFloat 7s ease-in-out 2s infinite;
+}
+
+@keyframes orbFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(15px, -20px) scale(1.15);
+    }
+
+    66% {
+        transform: translate(-10px, 10px) scale(0.9);
+    }
+}
+
+/* ===== Close Button ===== */
 .modal-close {
     position: absolute;
     top: 16px;
     right: 16px;
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 1.5rem;
+    background: var(--input-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-muted);
+    font-size: 1.2rem;
     cursor: pointer;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    border-radius: 12px;
+    transition: all 0.3s;
+    z-index: 10;
 }
 
 .modal-close:hover {
-    background: rgba(255, 107, 53, 0.1);
-    color: var(--accent-orange);
+    background: rgba(255, 107, 53, 0.15);
+    border-color: rgba(255, 107, 53, 0.3);
+    color: #ff6b35;
+    transform: rotate(90deg);
 }
 
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+/* ===== Guitar Neck Visual ===== */
+.guitar-visual {
+    position: relative;
+    margin: 0 auto 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.guitar-neck {
+    position: relative;
+    width: 200px;
+    height: 90px;
+    background: linear-gradient(180deg,
+            #3a2a1a 0%,
+            #4a3520 30%,
+            #3a2a1a 50%,
+            #4a3520 70%,
+            #3a2a1a 100%);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow:
+        inset 0 2px 8px rgba(0, 0, 0, 0.5),
+        0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.fret-markers {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1;
+}
+
+.fret-dot {
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #e8d5b7, #c9a86e);
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(232, 213, 183, 0.4);
+}
+
+.fret-dot.double {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+}
+
+.fret-dot.double span {
+    width: 7px;
+    height: 7px;
+    background: radial-gradient(circle, #e8d5b7, #c9a86e);
+    border-radius: 50%;
+    display: block;
+    box-shadow: 0 0 6px rgba(232, 213, 183, 0.4);
+}
+
+/* Guitar Strings */
+.guitar-strings {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 8px 0;
+    z-index: 2;
+}
+
+.guitar-string {
+    height: var(--string-thickness);
+    background: linear-gradient(90deg,
+            rgba(0, 0, 0, 0.3),
+            var(--string-color) 15%,
+            var(--string-color) 85%,
+            rgba(0, 0, 0, 0.3));
+    position: relative;
+    transform-origin: center;
+    opacity: 0.3;
+    transition: opacity 0.4s ease;
+}
+
+.guitar-string.active {
+    opacity: 1;
+    animation: stringPluck 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+    animation-delay: calc(var(--string-index) * 0.12s);
+}
+
+.guitar-string.active .string-vibration {
+    position: absolute;
+    inset: 0;
+    animation: vibrate 0.15s ease-in-out calc(var(--string-index) * 0.12s + 0.1s) 8;
+    animation-fill-mode: forwards;
+}
+
+@keyframes stringPluck {
+    0% {
+        transform: scaleY(1);
     }
 
+    20% {
+        transform: scaleY(4);
+    }
+
+    40% {
+        transform: scaleY(0.5);
+    }
+
+    60% {
+        transform: scaleY(2.5);
+    }
+
+    80% {
+        transform: scaleY(0.8);
+    }
+
+    100% {
+        transform: scaleY(1);
+        filter: brightness(1.8);
+    }
+}
+
+@keyframes vibrate {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(-1.5px);
+    }
+
+    75% {
+        transform: translateY(1.5px);
+    }
+}
+
+/* Fret Lines */
+.fret-lines {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 12px;
+    z-index: 1;
+}
+
+.fret-line {
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg,
+            rgba(192, 170, 130, 0.2),
+            rgba(192, 170, 130, 0.6),
+            rgba(192, 170, 130, 0.2));
+}
+
+/* Sound Wave Rings */
+.sound-waves {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.wave-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(255, 107, 53, 0.15);
+    border-radius: 50%;
+    animation: waveExpand 3s ease-out infinite;
+}
+
+.ring-1 {
+    width: 220px;
+    height: 100px;
+    animation-delay: 0s;
+}
+
+.ring-2 {
+    width: 220px;
+    height: 100px;
+    animation-delay: 1s;
+}
+
+.ring-3 {
+    width: 220px;
+    height: 100px;
+    animation-delay: 2s;
+}
+
+@keyframes waveExpand {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(2.2);
+        opacity: 0;
+    }
+}
+
+/* ===== Login Container ===== */
+.login-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.login-header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.logo-glow {
+    position: relative;
+    display: inline-block;
+}
+
+.logo-glow::after {
+    content: 'StrumFlow';
+    position: absolute;
+    inset: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.2rem;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, #ff6b35, #00ff9f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(18px);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.logo-large {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.2rem;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, #ff6b35 0%, #ff3366 50%, #00ff9f 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 4s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% center;
+    }
+
+    50% {
+        background-position: 100% center;
+    }
+}
+
+.login-subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--text-faint);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 8px;
+}
+
+.subtitle-line {
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.4), transparent);
+}
+
+/* Form */
+.login-form {
+    margin-bottom: 28px;
+}
+
+.login-form h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+}
+
+.wave-emoji {
+    display: inline-block;
+    animation: guitarSwing 2s ease-in-out infinite;
+}
+
+@keyframes guitarSwing {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-12deg);
+    }
+
+    75% {
+        transform: rotate(12deg);
+    }
+}
+
+.form-description {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    font-size: 0.9rem;
+}
+
+/* Input */
+.input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.3), rgba(0, 255, 159, 0.3));
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: 0;
+    filter: blur(8px);
+}
+
+.input-wrapper:focus-within .input-glow {
+    opacity: 1;
+}
+
+.input-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    z-index: 2;
+    transition: transform 0.3s;
+}
+
+.input-wrapper:focus-within .input-icon {
+    transform: translateY(-50%) scale(1.15);
+}
+
+.login-input {
+    position: relative;
+    width: 100%;
+    padding: 14px 18px 14px 48px;
+    font-size: 1.05rem;
+    background: var(--input-bg);
+    border: 1px solid var(--divider);
+    border-radius: 14px;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.4s;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.login-input:focus {
+    outline: none;
+    background: var(--card-border);
+    border-color: rgba(255, 107, 53, 0.4);
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.08);
+}
+
+.login-input::placeholder {
+    color: var(--text-faint);
+}
+
+/* Button */
+.login-button {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(135deg, #ff6b35, #ff3366);
+    color: white;
+    border: none;
+    padding: 17px 48px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.5px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-icon {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s;
+    font-size: 1.2rem;
+}
+
+.login-button:hover:not(:disabled) .btn-icon {
+    transform: translateX(6px);
+}
+
+.btn-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    transition: left 0.5s;
+}
+
+.login-button:hover:not(:disabled) .btn-shine {
+    left: 100%;
+}
+
+.login-button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow:
+        0 12px 36px rgba(255, 107, 53, 0.35),
+        0 0 20px rgba(255, 51, 102, 0.15);
+}
+
+.login-button:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.login-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+}
+
+/* Features */
+.login-features {
+    display: flex;
+    gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--card-border);
+}
+
+.feature-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.3px;
+    padding: 14px 8px;
+    border-radius: 14px;
+    background: var(--subtle-bg);
+    border: 1px solid var(--card-border);
+    transition: all 0.4s;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: featureIn 0.5s var(--feature-delay) ease-out forwards;
+}
+
+.feature-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--feature-color);
+    color: rgba(255, 255, 255, 0.7);
+    transform: translateY(-2px);
+}
+
+@keyframes featureIn {
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-.login-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.logo-large {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3.5rem;
-    letter-spacing: 3px;
-    background: linear-gradient(135deg, var(--accent-orange), var(--accent-green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 8px;
-}
-
-.login-subtitle {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.login-form {
-    margin-bottom: 32px;
-}
-
-.login-form h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-.form-description {
-    text-align: center;
-    color: var(--text-secondary);
-    margin-bottom: 32px;
-    font-size: 0.95rem;
-}
-
-.login-input {
-    width: 100%;
-    padding: 18px 24px;
-    font-size: 1.125rem;
-    background: var(--bg-dark);
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
-    color: var(--text-primary);
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.3s ease;
-    margin-bottom: 24px;
-}
-
-.login-input:focus {
-    outline: none;
-    border-color: var(--accent-orange);
-    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
-}
-
-.login-input::placeholder {
-    color: var(--text-secondary);
-}
-
-.login-button {
-    width: 100%;
-    background: linear-gradient(135deg, var(--accent-orange), #ff8556);
-    color: white;
-    border: none;
-    padding: 18px 48px;
-    font-size: 1.125rem;
-    font-weight: 700;
-    border-radius: 12px;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
-}
-
-.login-button:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(255, 107, 53, 0.4);
-}
-
-.login-button:active:not(:disabled) {
-    transform: translateY(0);
-}
-
-.login-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.login-features {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border-color);
-}
-
-.feature-item {
+.feature-icon-wrapper {
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    padding: 8px;
-    background: rgba(255, 107, 53, 0.05);
-    border-radius: 8px;
+    justify-content: center;
+    background: var(--input-bg);
+    border-radius: 10px;
+    font-size: 1.1rem;
 }
 
-@media (max-width: 768px) {
-    .login-container {
-        padding: 32px 24px;
+.feature-icon {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.feature-item:hover .feature-icon {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+/* Motivational Quote */
+.login-quote {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--card-border);
+}
+
+.login-quote p {
+    font-size: 0.78rem;
+    color: var(--text-faint);
+    font-style: italic;
+    letter-spacing: 0.3px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 520px) {
+    .login-modal-content {
+        padding: 36px 24px;
+        border-radius: 24px;
+        margin: 12px;
     }
 
-    .logo-large {
-        font-size: 2.5rem;
+    .logo-large,
+    .logo-glow::after {
+        font-size: 2.4rem;
+    }
+
+    .guitar-neck {
+        width: 160px;
+        height: 70px;
+    }
+
+    .login-features {
+        gap: 8px;
+    }
+
+    .feature-item {
+        font-size: 0.72rem;
+        padding: 10px 6px;
     }
 }

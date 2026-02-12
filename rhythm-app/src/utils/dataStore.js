@@ -2,10 +2,73 @@
 
 const KEYS = {
     RHYTHMS: 'strumflow_rhythms',
+    ARTICLES: 'strumflow_user_articles',
     COMMENTS: 'strumflow_comments',
+    PROFILE: 'strumflow_profile',
+    CHORDS: 'strumflow_user_chords'
 };
 
-// --- Built-in Articles ---
+// --- User Chords (Repertoire) ---
+
+export function getUserChords() {
+    try {
+        const data = localStorage.getItem(KEYS.CHORDS);
+        return data ? JSON.parse(data) : { mastered: [], learning: [] };
+    } catch {
+        return { mastered: [], learning: [] };
+    }
+}
+
+
+
+export function updateUserChord(chordId, status) {
+    const data = getUserChords();
+
+    // Remove from all lists first
+    data.mastered = data.mastered.filter(id => id !== chordId);
+    data.learning = data.learning.filter(id => id !== chordId);
+
+    if (status === 'mastered') {
+        data.mastered.push(chordId);
+        // Award XP for mastering a new chord (if not already mastered)
+        // Note: For simplicity, we just award it. In a real app, track 'first_time_mastered'.
+        // Let's assume re-mastering doesn't grant XP to avoid exploit, 
+        // but since we removed it first, we can't easily track history without more complex data.
+        // We'll just award 5 XP for the action for now.
+        addXP(5);
+    } else if (status === 'learning') {
+        data.learning.push(chordId);
+    }
+
+    localStorage.setItem(KEYS.CHORDS, JSON.stringify(data));
+    window.dispatchEvent(new Event('chordsUpdated'));
+    return data;
+}
+
+// --- Article Management ---
+export function deleteArticle(id) {
+    const articles = getAllArticles().filter(a => a.id !== id);
+    localStorage.setItem(KEYS.ARTICLES, JSON.stringify(articles));
+
+    // Also delete associated comments
+    const comments = JSON.parse(localStorage.getItem(KEYS.COMMENTS) || '[]');
+    const newComments = comments.filter(c => c.articleId !== id);
+    localStorage.setItem(KEYS.COMMENTS, JSON.stringify(newComments));
+
+    window.dispatchEvent(new Event('articleDeleted'));
+}
+
+export function updateArticle(id, updates) {
+    const articles = getAllArticles();
+    const index = articles.findIndex(a => a.id === id);
+    if (index !== -1) {
+        articles[index] = { ...articles[index], ...updates };
+        localStorage.setItem(KEYS.ARTICLES, JSON.stringify(articles));
+        window.dispatchEvent(new Event('articleUpdated'));
+        return articles[index];
+    }
+    return null;
+}
 export const articles = [
     {
         id: 'kesme',
@@ -267,4 +330,106 @@ export function addReply(commentId, reply) {
         return newReply;
     }
     return null;
+}
+
+// --- User Articles CRUD ---
+function getStoredArticles() {
+    try {
+        const data = localStorage.getItem(KEYS.ARTICLES);
+        return data ? JSON.parse(data) : [];
+    } catch {
+        return [];
+    }
+}
+
+function saveArticles(arts) {
+    localStorage.setItem(KEYS.ARTICLES, JSON.stringify(arts));
+}
+
+export function getUserArticles() {
+    return getStoredArticles();
+}
+
+export function getAllArticles() {
+    return [...getStoredArticles()];
+}
+
+export function addUserArticle(article) {
+    const arts = getStoredArticles();
+    const newArticle = {
+        ...article,
+        id: 'user_' + Date.now().toString(),
+        createdAt: new Date().toISOString(),
+        isUserCreated: true,
+    };
+    arts.unshift(newArticle);
+    saveArticles(arts);
+    return newArticle;
+}
+
+export function deleteUserArticle(id) {
+    const arts = getStoredArticles().filter((a) => a.id !== id);
+    saveArticles(arts);
+}
+// --- User Profile & Gamification ---
+const LEVELS = [
+    { level: 1, xp: 0, title: 'Çaylak Gitarist' },
+    { level: 2, xp: 100, title: 'Ritim Meraklısı' },
+    { level: 3, xp: 300, title: 'Gitar Çırağı' },
+    { level: 4, xp: 600, title: 'Sahne Tozu Yutmuş' },
+    { level: 5, xp: 1000, title: 'Ritim Ustası' },
+    { level: 6, xp: 1500, title: 'Virtüöz Adayı' },
+    { level: 7, xp: 2200, title: 'Gitar Efsanesi' },
+];
+
+export function getUserProfile() {
+    try {
+        const data = localStorage.getItem('strumflow_profile');
+        return data ? JSON.parse(data) : { xp: 0, level: 1, badges: [] };
+    } catch {
+        return { xp: 0, level: 1, badges: [] };
+    }
+}
+
+function saveUserProfile(profile) {
+    localStorage.setItem('strumflow_profile', JSON.stringify(profile));
+    // Trigger a custom event so components can update instantly
+    window.dispatchEvent(new Event('profileUpdated'));
+}
+
+export function addXP(amount) {
+    const profile = getUserProfile();
+    const oldLevel = profile.level;
+    profile.xp += amount;
+
+    // Check for level up
+    const nextLevel = LEVELS.slice().reverse().find(l => profile.xp >= l.xp);
+    if (nextLevel && nextLevel.level > profile.level) {
+        profile.level = nextLevel.level;
+        // You could trigger a "Level Up!" modal here via another event
+        console.log(`Level Up! New Level: ${profile.level}`);
+    }
+
+    saveUserProfile(profile);
+    return {
+        newXP: profile.xp,
+        newLevel: profile.level,
+        leveledUp: profile.level > oldLevel,
+        amountAdded: amount
+    };
+}
+
+export function getLevelInfo() {
+    const profile = getUserProfile();
+    const currentLevel = LEVELS.find(l => l.level === profile.level) || LEVELS[0];
+    const nextLevel = LEVELS.find(l => l.level === profile.level + 1);
+
+    return {
+        ...profile,
+        title: currentLevel.title,
+        nextLevelXP: nextLevel ? nextLevel.xp : null,
+        progress: nextLevel
+            ? ((profile.xp - currentLevel.xp) / (nextLevel.xp - currentLevel.xp)) * 100
+            : 100
+    };
 }

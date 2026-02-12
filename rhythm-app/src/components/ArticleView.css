@@ -28,7 +28,56 @@
 .article-big-icon {
     font-size: 3.5rem;
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 0;
+}
+
+.article-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.author-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.edit-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.edit-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background: rgba(231, 76, 60, 0.15);
+    color: #ff6b6b;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.delete-btn:hover {
+    background: rgba(231, 76, 60, 0.25);
+    transform: translateY(-2px);
 }
 
 .article-header-section h1 {
@@ -82,7 +131,7 @@
 }
 
 .article-code {
-    background: #0d0d0d;
+    background: var(--code-bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 20px;
@@ -125,7 +174,7 @@
 
 /* New Comment Form */
 .new-comment-form {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--input-bg);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 24px;
@@ -216,7 +265,7 @@
 .login-prompt {
     text-align: center;
     padding: 32px;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--input-bg);
     border: 1px dashed var(--border-color);
     border-radius: 16px;
     margin-bottom: 32px;
@@ -345,12 +394,12 @@
 .replies-list {
     border-top: 1px solid var(--border-color);
     padding-left: 32px;
-    background: rgba(255, 255, 255, 0.01);
+    background: var(--input-bg);
 }
 
 .reply-item {
     padding: 16px 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    border-top: 1px solid var(--border-color);
 }
 
 .reply-item:first-child {
@@ -361,7 +410,7 @@
 .reply-form {
     padding: 16px 24px 16px 56px;
     border-top: 1px solid var(--border-color);
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--input-bg);
 }
 
 .reply-input {

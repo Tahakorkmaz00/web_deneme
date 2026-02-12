@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { addRhythm } from '../utils/dataStore';
+import { addRhythm, addXP } from '../utils/dataStore';
 import { getAllChords } from '../utils/chordDatabase';
 import './CreateRhythm.css';
 
@@ -36,9 +36,15 @@ export default function CreateRhythm({ username, onBack, onCreated }) {
             strumPattern: strumPattern.trim(),
             bpm,
             author: username,
+            youtubeUrl: youtubeUrl.trim(), // Add youtubeUrl to the rhythm object
         });
 
         if (rhythm) {
+            // Gamification: Add 50 XP
+            const result = addXP(50);
+            if (result.leveledUp) {
+                alert(`🎉 TEBRİKLER!\nSeviye Atladın: ${result.newLevel}`);
+            }
             onCreated(rhythm);
         }
     };
@@ -46,9 +52,6 @@ export default function CreateRhythm({ username, onBack, onCreated }) {
     return (
         <section className="create-rhythm-page">
             <div className="create-container">
-                <button className="back-btn" onClick={onBack}>
-                    ← Kütüphaneye Dön
-                </button>
 
                 <div className="create-header">
                     <span className="create-icon">✨</span>
@@ -157,14 +160,28 @@ export default function CreateRhythm({ username, onBack, onCreated }) {
                         </div>
                     )}
 
+                    {/* YouTube Link */}
+                    <div className="form-group">
+                        <label>🎥 YouTube Video Linki (Opsiyonel)</label>
+                        <input
+                            type="text"
+                            value={youtubeUrl}
+                            onChange={(e) => setYoutubeUrl(e.target.value)}
+                            placeholder="Ör: https://youtu.be/..."
+                            className="form-input"
+                        />
+                    </div>
+
                     {/* Submit */}
-                    <button
-                        type="submit"
-                        className="publish-btn"
-                        disabled={!title.trim() || chords.length === 0}
-                    >
-                        🌍 Ritmi Paylaş
-                    </button>
+                    <div className="form-actions">
+                        <button
+                            type="submit"
+                            className="submit-btn"
+                            disabled={!title.trim() || chords.length === 0}
+                        >
+                            💾 Ritmi Kaydet
+                        </button>
+                    </div>
                 </form>
             </div>
         </section>

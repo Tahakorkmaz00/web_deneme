@@ -2,262 +2,148 @@ import { useState, useEffect } from 'react';
 import './HomeScreen.css';
 
 const QUOTES = [
-    { text: "Müzik, kelimelerin bittiği yerde başlar.", author: "Hans Christian Andersen" },
-    { text: "Gitar benim için ikinci bir ses gibi.", author: "B.B. King" },
-    { text: "Her gün pratik yap, bir gün ustalaşırsın.", author: "Jimi Hendrix" },
-    { text: "Müzik evrensel bir dildir.", author: "Henry Wadsworth Longfellow" },
-    { text: "Bir gitar tüm bir orkestranın yerine geçer.", author: "Beethoven" },
-    { text: "Basit çal ama kalpten çal.", author: "Eric Clapton" },
-    { text: "Müzik ruhun gıdasıdır.", author: "Platon" },
-    { text: "Hata yapmaktan korkma, çalmaktan korkma.", author: "Miles Davis" },
+    { text: "Muzik, kelimelerin bittigi yerde baslar.", author: "Hans Christian Andersen" },
+    { text: "Gitar benim icin ikinci bir ses gibi.", author: "B.B. King" },
+    { text: "Her gun pratik yap, bir gun ustalasirsin.", author: "Jimi Hendrix" },
+    { text: "Muzik evrensel bir dildir.", author: "Henry Wadsworth Longfellow" },
+    { text: "Bir gitar tum bir orkestranin yerine gecer.", author: "Beethoven" },
+    { text: "Basit cal ama kalpten cal.", author: "Eric Clapton" },
+    { text: "Muzik ruhun gidasidir.", author: "Platon" },
+    { text: "Hata yapmaktan korkma, calmaktan korkma.", author: "Miles Davis" },
 ];
 
 export default function HomeScreen({ onNavigate }) {
     const [hoveredCard, setHoveredCard] = useState(null);
     const [loaded, setLoaded] = useState(false);
-    const [activeString, setActiveString] = useState(-1);
     const [quote] = useState(() => QUOTES[Math.floor(Math.random() * QUOTES.length)]);
 
     useEffect(() => {
-        setTimeout(() => setLoaded(true), 100);
-        for (let i = 0; i < 6; i++) {
-            setTimeout(() => setActiveString(i), 400 + i * 120);
-        }
+        setTimeout(() => setLoaded(true), 80);
     }, []);
-
-    const notes = ['♪', '♫', '♬', '♩', '🎵', '🎶', '♪', '♫'];
 
     return (
         <section className="home-screen">
-            {/* Floating Music Notes */}
-            <div className="home-floating-notes">
-                {notes.map((note, i) => (
-                    <span key={i} className="home-note" style={{
-                        '--n-delay': `${i * 2.2}s`,
-                        '--n-left': `${5 + i * 12}%`,
-                        '--n-end': `${10 + i * 10}%`,
-                        '--n-dur': `${6 + i * 0.8}s`,
-                    }}>{note}</span>
+            {/* Rosette — sound hole pattern */}
+            <div className="home-rosette">
+                <div className="rosette-ring r1"></div>
+                <div className="rosette-ring r2"></div>
+                <div className="rosette-ring r3"></div>
+                <div className="rosette-ring r4"></div>
+                <div className="rosette-dots">
+                    {Array.from({ length: 24 }).map((_, i) => (
+                        <div key={i} className="rosette-dot" style={{ '--dot-i': i }} />
+                    ))}
+                </div>
+            </div>
+
+            {/* Horizontal strings — six lines across the viewport */}
+            <div className="home-strings-bg">
+                {[0, 1, 2, 3, 4, 5].map(i => (
+                    <div key={i} className="bg-string" style={{ '--s-i': i }} />
                 ))}
             </div>
 
-            {/* Glow Orbs */}
-            <div className="home-orb orb-orange"></div>
-            <div className="home-orb orb-green"></div>
-            <div className="home-orb orb-pink"></div>
-
             <div className={`home-container ${loaded ? 'loaded' : ''}`}>
-                {/* Hero Section */}
+                {/* Hero */}
                 <div className="home-hero">
-                    {/* Guitar Neck */}
-                    <div className="hero-guitar">
-                        <div className="hero-guitar-neck">
-                            <div className="hero-fret-dots">
-                                <div className="hero-dot"></div>
-                                <div className="hero-dot"></div>
-                                <div className="hero-dot double-dot">
-                                    <span></span><span></span>
-                                </div>
-                            </div>
-                            <div className="hero-strings">
-                                {[0, 1, 2, 3, 4, 5].map((i) => (
-                                    <div
-                                        key={i}
-                                        className={`hero-string ${activeString >= i ? 'plucked' : ''}`}
-                                        style={{
-                                            '--si': i,
-                                            '--thickness': `${1 + i * 0.5}px`,
-                                            '--scolor': ['#f0dfc0', '#e8d1a8', '#dcc090', '#c9a868', '#b89050', '#a07030'][i],
-                                        }}
-                                    />
-                                ))}
-                            </div>
-                            <div className="hero-frets">
-                                {[0, 1, 2, 3, 4].map((i) => (
-                                    <div key={i} className="hero-fret" />
-                                ))}
-                            </div>
-                        </div>
+                    <div className="hero-label">Gitar Toplulugu & Ritim Kutuphanesi</div>
+                    <h1 className="home-title">StrumFlow</h1>
+                    <p className="home-subtitle">
+                        Gitar tekniklerini ogren, ritimlerini paylas, birlikte cal
+                    </p>
 
-                        {/* Sound Waves */}
-                        <div className="hero-waves">
-                            <div className="hero-wave w1"></div>
-                            <div className="hero-wave w2"></div>
-                            <div className="hero-wave w3"></div>
-                        </div>
-
-                        {/* Strum Icon */}
-                        <div className="hero-strum-icon">
-                            <span className="strum-emoji">🎸</span>
-                            <div className="strum-ring r1"></div>
-                            <div className="strum-ring r2"></div>
-                        </div>
+                    {/* String divider */}
+                    <div className="string-divider">
+                        <span className="divider-wire"></span>
+                        <span className="divider-node"></span>
+                        <span className="divider-wire"></span>
                     </div>
 
-                    {/* Title */}
-                    <div className="hero-text">
-                        <div className="title-glow">
-                            <h1 className="home-title">StrumFlow</h1>
-                        </div>
-                        <p className="home-subtitle">
-                            <span className="sub-line"></span>
-                            Gitar tekniklerini öğren, ritimlerini paylaş, birlikte çal
-                            <span className="sub-line"></span>
-                        </p>
-                    </div>
-
-                    {/* Motivational Quote */}
+                    {/* Quote */}
                     <div className="hero-quote">
-                        <p className="quote-text">"{quote.text}"</p>
-                        <span className="quote-author">— {quote.author}</span>
-                    </div>
-
-                    {/* Stats */}
-                    <div className="hero-stats">
-                        {[
-                            { value: '3+', label: 'Teknik Makale', icon: '📝' },
-                            { value: '∞', label: 'Ritim Oluştur', icon: '🎵' },
-                            { value: '🔥', label: 'Topluluk', icon: '' },
-                        ].map((s, i) => (
-                            <div key={i} className="stat-item" style={{ '--stat-delay': `${0.6 + i * 0.15}s` }}>
-                                <span className="stat-value">{s.icon || s.value}</span>
-                                <span className="stat-label">{s.label}</span>
-                            </div>
-                        ))}
+                        <p className="quote-text">{quote.text}</p>
+                        <span className="quote-author">{quote.author}</span>
                     </div>
                 </div>
 
-                {/* Navigation Cards */}
+                {/* Navigation Cards — editorial stagger */}
                 <div className="home-cards">
-                    {/* Forum Card */}
                     <div
                         className={`home-card ${hoveredCard === 'edu' ? 'hovered' : ''}`}
                         onClick={() => onNavigate('education')}
                         onMouseEnter={() => setHoveredCard('edu')}
                         onMouseLeave={() => setHoveredCard(null)}
-                        style={{ '--card-delay': '0.3s', '--card-color': 'var(--accent-orange)' }}
+                        style={{ '--card-delay': '0.15s', '--card-accent': 'var(--accent-amber)' }}
                     >
-                        <div className="card-bg-pattern">
-                            <svg viewBox="0 0 200 200" className="card-pattern-svg">
-                                <circle cx="160" cy="40" r="80" fill="rgba(255,107,53,0.04)" />
-                                <circle cx="180" cy="60" r="50" fill="rgba(255,107,53,0.03)" />
-                            </svg>
-                        </div>
-                        <div className="card-accent-line"></div>
+                        <div className="card-index">01</div>
                         <div className="card-body">
-                            <div className="card-icon-box">
-                                <span className="card-icon">📚</span>
-                                <div className="icon-ring"></div>
-                            </div>
-                            <div className="card-text">
-                                <h2>Forum</h2>
-                                <p>Kesme, susturma, rasguido gibi teknikleri detaylı makalelerle öğren. Topluluğa katıl ve deneyimlerini paylaş.</p>
-                            </div>
+                            <h2>Forum</h2>
+                            <p>Kesme, susturma, rasguido gibi teknikleri detayli makalelerle ogren. Topluluga katil ve deneyimlerini paylas.</p>
                             <div className="card-tags">
-                                <span className="tag">🤚 Kesme</span>
-                                <span className="tag">🔇 Susturma</span>
-                                <span className="tag">💃 Rasguido</span>
+                                <span className="tag">Kesme</span>
+                                <span className="tag">Susturma</span>
+                                <span className="tag">Rasguido</span>
                             </div>
                             <div className="card-cta">
-                                <span>Keşfet</span>
-                                <span className="cta-arrow">→</span>
+                                <span>Kesfet</span>
+                                <span className="cta-arrow">&rarr;</span>
                             </div>
                         </div>
+                        <div className="card-string"></div>
                     </div>
 
-                    {/* Divider */}
-                    <div className="cards-divider">
-                        <div className="divider-line"></div>
-                        <div className="divider-icon">
-                            <span>♫</span>
-                        </div>
-                        <div className="divider-line"></div>
-                    </div>
-
-                    {/* Kütüphane Card */}
                     <div
                         className={`home-card ${hoveredCard === 'lib' ? 'hovered' : ''}`}
                         onClick={() => onNavigate('library')}
                         onMouseEnter={() => setHoveredCard('lib')}
                         onMouseLeave={() => setHoveredCard(null)}
-                        style={{ '--card-delay': '0.5s', '--card-color': 'var(--accent-green)' }}
+                        style={{ '--card-delay': '0.3s', '--card-accent': 'var(--accent-sage)' }}
                     >
-                        <div className="card-bg-pattern">
-                            <svg viewBox="0 0 200 200" className="card-pattern-svg">
-                                <circle cx="160" cy="40" r="80" fill="rgba(0,255,159,0.04)" />
-                                <circle cx="180" cy="60" r="50" fill="rgba(0,255,159,0.03)" />
-                            </svg>
-                        </div>
-                        <div className="card-accent-line"></div>
+                        <div className="card-index">02</div>
                         <div className="card-body">
-                            <div className="card-icon-box">
-                                <span className="card-icon">🎸</span>
-                                <div className="icon-ring"></div>
-                            </div>
-                            <div className="card-text">
-                                <h2>Ritimler</h2>
-                                <p>Kendi ritimlerini oluştur, akorlarını ekle ve gelişmiş metronom ile pratik yap.</p>
-                            </div>
+                            <h2>Ritimler</h2>
+                            <p>Kendi ritimlerini olustur, akorlarini ekle ve gelismis metronom ile pratik yap.</p>
                             <div className="card-tags">
-                                <span className="tag">🎵 Oluştur</span>
-                                <span className="tag">🥁 Metronom</span>
+                                <span className="tag">Olustur</span>
+                                <span className="tag">Metronom</span>
                             </div>
                             <div className="card-cta">
-                                <span>Başla</span>
-                                <span className="cta-arrow">→</span>
+                                <span>Basla</span>
+                                <span className="cta-arrow">&rarr;</span>
                             </div>
                         </div>
+                        <div className="card-string"></div>
                     </div>
 
-                    {/* Divider */}
-                    <div className="cards-divider">
-                        <div className="divider-line"></div>
-                        <div className="divider-icon">
-                            <span>🎼</span>
-                        </div>
-                        <div className="divider-line"></div>
-                    </div>
-
-                    {/* Akorlar Card */}
                     <div
                         className={`home-card ${hoveredCard === 'chords' ? 'hovered' : ''}`}
                         onClick={() => onNavigate('chords')}
                         onMouseEnter={() => setHoveredCard('chords')}
                         onMouseLeave={() => setHoveredCard(null)}
-                        style={{ '--card-delay': '0.7s', '--card-color': '#6c5ce7' }}
+                        style={{ '--card-delay': '0.45s', '--card-accent': 'var(--accent-rose)' }}
                     >
-                        <div className="card-bg-pattern">
-                            <svg viewBox="0 0 200 200" className="card-pattern-svg">
-                                <circle cx="160" cy="40" r="80" fill="rgba(108,92,231,0.04)" />
-                                <circle cx="180" cy="60" r="50" fill="rgba(108,92,231,0.03)" />
-                            </svg>
-                        </div>
-                        <div className="card-accent-line"></div>
+                        <div className="card-index">03</div>
                         <div className="card-body">
-                            <div className="card-icon-box">
-                                <span className="card-icon">🎹</span>
-                                <div className="icon-ring"></div>
-                            </div>
-                            <div className="card-text">
-                                <h2>Akorlar</h2>
-                                <p>Am, E, G ve daha fazlası... Görsel şemalarla tüm akorları keşfet ve öğren.</p>
-                            </div>
+                            <h2>Akorlar</h2>
+                            <p>Am, E, G ve daha fazlasi... Gorsel semalarla tum akorlari kesfet ve ogren.</p>
                             <div className="card-tags">
-                                <span className="tag">👁️ Görsel</span>
-                                <span className="tag">🔍 Arama</span>
+                                <span className="tag">Gorsel</span>
+                                <span className="tag">Arama</span>
                             </div>
                             <div className="card-cta">
-                                <span>İncele</span>
-                                <span className="cta-arrow">→</span>
+                                <span>Incele</span>
+                                <span className="cta-arrow">&rarr;</span>
                             </div>
                         </div>
+                        <div className="card-string"></div>
                     </div>
                 </div>
 
                 {/* Footer */}
                 <div className="home-footer">
-                    <span className="footer-note">🎼</span>
-                    <span>Müzik bir yolculuktur — bugün başla</span>
+                    <span className="footer-wire"></span>
+                    <span className="footer-text">Muzik bir yolculuktur</span>
+                    <span className="footer-wire"></span>
                 </div>
             </div>
         </section>

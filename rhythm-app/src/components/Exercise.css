@@ -4,7 +4,7 @@
 }
 
 .exercise-container {
-    max-width: 600px;
+    max-width: 560px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
@@ -16,16 +16,17 @@
 }
 
 .exercise-header h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    letter-spacing: 2px;
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
     color: var(--text-primary);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .exercise-song-title {
-    font-size: 1.1rem;
-    color: var(--accent-green);
+    font-size: 1rem;
+    color: var(--accent-sage);
     font-weight: 600;
 }
 
@@ -33,10 +34,10 @@
 .metronome-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 24px;
-    padding: 40px;
+    border-radius: 16px;
+    padding: 36px;
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 /* Chord Spotlight */
@@ -45,15 +46,15 @@
 }
 
 .chord-circle {
-    width: 140px;
-    height: 140px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(0, 255, 159, 0.08), rgba(0, 201, 255, 0.08));
-    border: 3px solid rgba(0, 255, 159, 0.2);
+    background: rgba(123, 158, 135, 0.06);
+    border: 2px solid rgba(123, 158, 135, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 16px;
+    margin: 0 auto 14px;
     transition: all 0.15s;
 }
 
@@ -62,48 +63,46 @@
 }
 
 @keyframes chordPulse {
-
-    0%,
-    100% {
+    0%, 100% {
         transform: scale(1);
-        border-color: rgba(0, 255, 159, 0.2);
-        box-shadow: 0 0 0 0 rgba(0, 255, 159, 0);
+        border-color: rgba(123, 158, 135, 0.15);
+        box-shadow: none;
     }
-
     50% {
-        transform: scale(1.05);
-        border-color: rgba(0, 255, 159, 0.6);
-        box-shadow: 0 0 30px rgba(0, 255, 159, 0.15);
+        transform: scale(1.04);
+        border-color: rgba(123, 158, 135, 0.5);
+        box-shadow: 0 0 24px rgba(123, 158, 135, 0.1);
     }
 }
 
 .chord-letter {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3.5rem;
-    letter-spacing: 2px;
-    color: var(--accent-green);
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--accent-sage);
 }
 
 .chord-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
 }
 
 .chord-fullname {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
 }
 
 .chord-remaining {
-    font-size: 0.85rem;
-    color: var(--accent-green);
+    font-size: 0.8rem;
+    color: var(--accent-sage);
     font-weight: 600;
 }
 
 /* Progress Bar */
 .chord-progress-bar {
-    height: 4px;
+    height: 3px;
     background: var(--input-bg);
     border-radius: 2px;
     margin-bottom: 28px;
@@ -112,7 +111,7 @@
 
 .chord-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #00ff9f, #00c9ff);
+    background: var(--accent-sage);
     border-radius: 2px;
     transition: width 0.15s linear;
 }
@@ -121,13 +120,13 @@
 .beat-indicators {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
     margin-bottom: 24px;
 }
 
 .beat-dot {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: var(--input-bg);
     border: 2px solid var(--border-color);
@@ -135,27 +134,28 @@
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-family: 'Syne', sans-serif;
     color: var(--text-secondary);
     transition: all 0.1s;
 }
 
 .beat-dot.accent {
-    border-color: rgba(255, 107, 53, 0.3);
+    border-color: rgba(212, 148, 58, 0.25);
 }
 
 .beat-dot.active {
-    background: var(--accent-green);
-    border-color: var(--accent-green);
-    color: #0a0a0a;
-    transform: scale(1.15);
-    box-shadow: 0 0 20px rgba(0, 255, 159, 0.4);
+    background: var(--accent-sage);
+    border-color: var(--accent-sage);
+    color: #0f0d0a;
+    transform: scale(1.12);
+    box-shadow: 0 0 16px rgba(123, 158, 135, 0.3);
 }
 
 .beat-dot.active.accent {
-    background: var(--accent-orange);
-    border-color: var(--accent-orange);
-    box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+    background: var(--accent-amber);
+    border-color: var(--accent-amber);
+    box-shadow: 0 0 16px rgba(212, 148, 58, 0.3);
 }
 
 /* Strum Pattern */
@@ -164,23 +164,25 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 14px 20px;
+    padding: 12px 18px;
     background: var(--input-bg);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    margin-bottom: 32px;
+    border-radius: 8px;
+    margin-bottom: 28px;
 }
 
 .strum-label {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .strum-value {
     font-family: 'Fira Code', monospace;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     letter-spacing: 3px;
-    color: var(--accent-orange);
+    color: var(--accent-amber);
     font-weight: 700;
 }
 
@@ -188,8 +190,8 @@
 .metronome-controls {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-bottom: 32px;
+    gap: 16px;
+    margin-bottom: 28px;
 }
 
 .control-btn {
@@ -200,35 +202,35 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .play-btn {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #00ff9f, #00c9ff);
-    color: #0a0a0a;
-    font-size: 2rem;
-    box-shadow: 0 8px 24px rgba(0, 255, 159, 0.2);
+    width: 72px;
+    height: 72px;
+    background: var(--accent-sage);
+    color: #0f0d0a;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 20px rgba(123, 158, 135, 0.2);
 }
 
 .play-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 12px 36px rgba(0, 255, 159, 0.3);
+    box-shadow: 0 8px 28px rgba(123, 158, 135, 0.3);
 }
 
 .play-btn.playing {
-    background: linear-gradient(135deg, #ff6b35, #ff3366);
-    box-shadow: 0 8px 24px rgba(255, 107, 53, 0.2);
+    background: var(--accent-rose);
+    box-shadow: 0 4px 20px rgba(196, 107, 124, 0.2);
 }
 
 .play-btn.playing:hover {
-    box-shadow: 0 12px 36px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 8px 28px rgba(196, 107, 124, 0.3);
 }
 
 .reset-btn {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     background: var(--bg-dark);
     border: 1px solid var(--border-color);
     color: var(--text-secondary);
@@ -246,65 +248,69 @@
 }
 
 .bpm-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
     letter-spacing: 2px;
+    text-transform: uppercase;
     color: var(--text-secondary);
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .bpm-slider-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 10px;
+    margin-bottom: 14px;
 }
 
 .bpm-adj {
     background: var(--bg-dark);
     border: 1px solid var(--border-color);
     color: var(--text-secondary);
-    padding: 8px 14px;
-    border-radius: 10px;
+    padding: 6px 12px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
     transition: all 0.2s;
 }
 
 .bpm-adj.small {
-    padding: 8px 10px;
-    font-size: 0.8rem;
+    padding: 6px 8px;
+    font-size: 0.78rem;
 }
 
 .bpm-adj:hover {
-    border-color: var(--accent-green);
-    color: var(--accent-green);
+    border-color: var(--accent-sage);
+    color: var(--accent-sage);
 }
 
 .bpm-display {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: var(--accent-green);
-    min-width: 100px;
-    letter-spacing: 2px;
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent-sage);
+    min-width: 90px;
+    letter-spacing: -1px;
 }
 
 .bpm-display small {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-secondary);
     letter-spacing: 1px;
+    font-weight: 500;
 }
 
 .bpm-range {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
     margin: 0 auto;
     display: block;
-    accent-color: var(--accent-green);
-    height: 4px;
+    accent-color: var(--accent-sage);
+    height: 3px;
     cursor: pointer;
 }
 
@@ -312,86 +318,87 @@
 .progression-overview {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 20px;
-    padding: 28px;
+    border-radius: 12px;
+    padding: 24px;
 }
 
 .progression-overview h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
     color: var(--text-secondary);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .progression-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
 }
 
 .prog-chip {
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 16px;
+    padding: 8px 14px;
     background: var(--input-bg);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 6px;
     transition: all 0.3s;
 }
 
 .prog-chip.current {
-    background: rgba(0, 255, 159, 0.08);
-    border-color: var(--accent-green);
-    box-shadow: 0 0 16px rgba(0, 255, 159, 0.1);
+    background: rgba(123, 158, 135, 0.06);
+    border-color: var(--accent-sage);
+    box-shadow: 0 0 12px rgba(123, 158, 135, 0.08);
 }
 
 .prog-chip.done {
-    opacity: 0.4;
+    opacity: 0.35;
 }
 
 .chip-name {
     font-weight: 700;
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .prog-chip.current .chip-name {
-    color: var(--accent-green);
+    color: var(--accent-sage);
 }
 
 .chip-repeat {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: var(--text-secondary);
 }
 
 @media (max-width: 600px) {
     .metronome-card {
-        padding: 28px 20px;
+        padding: 24px 18px;
     }
 
     .chord-circle {
-        width: 110px;
-        height: 110px;
+        width: 100px;
+        height: 100px;
     }
 
     .chord-letter {
-        font-size: 2.8rem;
+        font-size: 2.4rem;
     }
 
     .beat-dot {
-        width: 44px;
-        height: 44px;
-        font-size: 0.95rem;
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
     }
 
     .beat-indicators {
-        gap: 14px;
+        gap: 12px;
     }
 
     .bpm-display {
-        font-size: 2rem;
-        min-width: 80px;
+        font-size: 1.8rem;
+        min-width: 72px;
     }
 }

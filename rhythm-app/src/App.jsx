@@ -186,12 +186,27 @@ function App() {
         <div className="container">
           <div className="header-content">
             <div className="logo" onClick={goHome}>StrumFlow</div>
+            <nav className="header-nav">
+              <button
+                className={`header-nav-link${currentPage === 'education' || currentPage === 'article-view' || currentPage === 'create-article' || currentPage === 'edit-article' ? ' active' : ''}`}
+                onClick={() => navigateTo('education')}
+              >
+                Forum
+              </button>
+              <button
+                className={`header-nav-link${currentPage === 'library' || currentPage === 'create' || currentPage === 'rhythm-detail' || currentPage === 'exercise' ? ' active' : ''}`}
+                onClick={() => navigateTo('library')}
+              >
+                Ritimler
+              </button>
+              <button
+                className={`header-nav-link${currentPage === 'chords' ? ' active' : ''}`}
+                onClick={() => navigateTo('chords')}
+              >
+                Akorlar
+              </button>
+            </nav>
             <div className="header-right">
-              {currentPage !== 'home' && (
-                <button className="nav-home-btn" onClick={goHome}>
-                  🏠 Ana Sayfa
-                </button>
-              )}
               <button
                 className="theme-toggle"
                 onClick={toggleTheme}

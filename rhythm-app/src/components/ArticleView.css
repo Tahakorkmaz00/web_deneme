@@ -504,3 +504,45 @@
         padding-left: 28px;
     }
 }
+
+.comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.comment-delete-btn {
+    background: none;
+    border: none;
+    color: var(--accent-rose);
+    font-size: 0.75rem;
+    cursor: pointer;
+    padding: 3px 0;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.comment-delete-btn:hover {
+    opacity: 1;
+}
+
+.reply-delete-btn {
+    background: none;
+    border: none;
+    color: var(--accent-rose);
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-left: auto;
+    opacity: 0.3;
+    transition: opacity 0.2s;
+}
+
+.reply-delete-btn:hover {
+    opacity: 1;
+}
+
+.comment-meta {
+    width: 100%;
+}

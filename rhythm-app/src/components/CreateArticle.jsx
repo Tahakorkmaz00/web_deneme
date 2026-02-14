@@ -5,7 +5,7 @@ import './CreateArticle.css';
 const EMOJI_OPTIONS = ['📝', '🎸', '🎵', '🎶', '🎤', '🎼', '🤘', '🎯', '💡', '🔥', '⚡', '🌟', '🎻', '🥁', '🎹', '🎺'];
 const COLOR_OPTIONS = ['#ff6b35', '#00ff9f', '#ff3366', '#6c5ce7', '#00cec9', '#fdcb6e', '#e17055', '#0984e3', '#d63031', '#00b894', '#e84393', '#2d3436'];
 
-export default function CreateArticle({ username, onBack, onCreated, initialData }) {
+export default function CreateArticle({ user, onBack, onCreated, initialData }) {
     const [title, setTitle] = useState(initialData?.title || '');
     const [shortDesc, setShortDesc] = useState(initialData?.shortDesc || '');
     const [content, setContent] = useState(initialData?.content || '');
@@ -27,7 +27,7 @@ export default function CreateArticle({ username, onBack, onCreated, initialData
             youtubeUrl: youtubeUrl.trim(),
             icon,
             color,
-            author: initialData?.author || username || 'Anonim',
+            author: initialData?.author || user.name || 'Anonim',
         };
 
         if (isEditing) {
@@ -55,7 +55,7 @@ export default function CreateArticle({ username, onBack, onCreated, initialData
                 </div>
 
                 <form className="create-article-form" onSubmit={handleSubmit}>
-                    {!username && (
+                    {!user.name && (
                         <div className="guest-warning">
                             ⚠️ Giriş yapmadığınız için bu makaleyi daha sonra <strong>düzenleyemezsiniz</strong> veya <strong>silemezsiniz</strong>.
                         </div>

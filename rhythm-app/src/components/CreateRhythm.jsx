@@ -3,13 +3,14 @@ import { addRhythm, addXP } from '../utils/dataStore';
 import { getAllChords } from '../utils/chordDatabase';
 import './CreateRhythm.css';
 
-export default function CreateRhythm({ username, onBack, onCreated }) {
+export default function CreateRhythm({ user, onBack, onCreated }) {
     const [title, setTitle] = useState('');
     const [chords, setChords] = useState([]);
     const [selectedChord, setSelectedChord] = useState('');
     const [repeatCount, setRepeatCount] = useState(4);
     const [strumPattern, setStrumPattern] = useState('↓ ↓ ↑ ↓ ↑');
     const [bpm, setBpm] = useState(100);
+    const [youtubeUrl, setYoutubeUrl] = useState('');
 
     const allChords = getAllChords();
 
@@ -35,8 +36,8 @@ export default function CreateRhythm({ username, onBack, onCreated }) {
             chords,
             strumPattern: strumPattern.trim(),
             bpm,
-            author: username,
-            youtubeUrl: youtubeUrl.trim(), // Add youtubeUrl to the rhythm object
+            author: user.name,
+            youtubeUrl: youtubeUrl.trim(),
         });
 
         if (rhythm) {

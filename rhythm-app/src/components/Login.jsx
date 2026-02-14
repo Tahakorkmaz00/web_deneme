@@ -9,10 +9,21 @@ export default function Login({ onLogin, onClose }) {
         setIsVisible(true);
     }, []);
 
+
+    const [adminClicks, setAdminClicks] = useState(0);
+
+    const handleLogoClick = () => {
+        const newClicks = adminClicks + 1;
+        setAdminClicks(newClicks);
+        if (newClicks >= 3) {
+            onLogin('Yönetici', true);
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (username.trim()) {
-            onLogin(username.trim());
+            onLogin(username.trim(), false);
         }
     };
 
@@ -38,7 +49,7 @@ export default function Login({ onLogin, onClose }) {
                 {/* Main Content */}
                 <div className="login-container">
                     <div className="login-header">
-                        <div className="logo-large">StrumFlow</div>
+                        <div className="logo-large" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>StrumFlow</div>
                         <div className="login-label">
                             <span className="label-wire"></span>
                             <span>Gitar Toplulugu</span>

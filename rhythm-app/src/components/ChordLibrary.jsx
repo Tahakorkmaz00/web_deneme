@@ -99,7 +99,7 @@ const ChordDiagram = ({ chord }) => {
     );
 };
 
-export default function ChordLibrary({ onBack }) {
+export default function ChordLibrary({ onBack, user }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [activeTab, setActiveTab] = useState('library'); // 'library' | 'repertoire'
     const [userChords, setUserChords] = useState({ mastered: [], learning: [] });

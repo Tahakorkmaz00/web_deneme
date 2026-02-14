@@ -13,7 +13,7 @@ import './App.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState('');
+  const [user, setUser] = useState({ name: '', isAdmin: false });
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
   const [pageData, setPageData] = useState({});
@@ -31,15 +31,15 @@ function App() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const handleLogin = (name) => {
-    setUsername(name);
+  const handleLogin = (name, isAdmin = false) => {
+    setUser({ name, isAdmin });
     setIsLoggedIn(true);
     setShowLoginModal(false);
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUsername('');
+    setUser({ name: '', isAdmin: false });
   };
 
   const navigateTo = (page, data = {}) => {
@@ -73,7 +73,7 @@ function App() {
           <ArticleView
             articleId={pageData.articleId}
             isLoggedIn={isLoggedIn}
-            username={username}
+            user={user}
             onBack={() => navigateTo('education')}
             onRequestLogin={() => setShowLoginModal(true)}
             onNavigate={navigateTo}
@@ -81,12 +81,12 @@ function App() {
         );
 
       case 'chords':
-        return <ChordLibrary onBack={goHome} />;
+        return <ChordLibrary onBack={goHome} user={user} />;
 
       case 'create-article':
         return (
           <CreateArticle
-            username={username}
+            user={user}
             onBack={() => navigateTo('education')}
             onCreated={(article) => navigateTo('article-view', { articleId: article.id })}
           />
@@ -95,7 +95,7 @@ function App() {
       case 'edit-article':
         return (
           <CreateArticle
-            username={username}
+            user={user}
             onBack={() => navigateTo('article-view', { articleId: pageData.article.id })}
             onCreated={(updatedArticle) => navigateTo('article-view', { articleId: updatedArticle.id })}
             initialData={pageData.article}
@@ -115,7 +115,7 @@ function App() {
       case 'create':
         return (
           <CreateRhythm
-            username={username}
+            user={user}
             onBack={() => navigateTo('library')}
             onCreated={(rhythm) => navigateTo('rhythm-detail', { rhythmId: rhythm.id })}
           />
@@ -125,7 +125,7 @@ function App() {
         return (
           <RhythmDetail
             rhythmId={pageData.rhythmId}
-            username={username}
+            user={user}
             onBack={() => navigateTo('library')}
             onExercise={(rhythm) => {
               setExerciseRhythm(rhythm);
@@ -218,7 +218,10 @@ function App() {
               </button>
               {isLoggedIn ? (
                 <div className="user-profile">
-                  <span className="user-name">{username}</span>
+                  <span className="user-name">
+                    {user.isAdmin && <span className="admin-badge">ADMIN</span>}
+                    {user.name}
+                  </span>
                   <button className="logout-btn" onClick={handleLogout}>Çıkış</button>
                 </div>
               ) : (

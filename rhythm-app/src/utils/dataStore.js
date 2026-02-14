@@ -332,6 +332,20 @@ export function addReply(commentId, reply) {
     return null;
 }
 
+export function deleteComment(commentId) {
+    const comments = getStoredComments().filter(c => c.id !== commentId);
+    saveComments(comments);
+}
+
+export function deleteReply(commentId, replyId) {
+    const comments = getStoredComments();
+    const comment = comments.find(c => c.id === commentId);
+    if (comment && comment.replies) {
+        comment.replies = comment.replies.filter(r => r.id !== replyId);
+        saveComments(comments);
+    }
+}
+
 // --- User Articles CRUD ---
 function getStoredArticles() {
     try {

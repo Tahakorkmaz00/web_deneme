@@ -3,7 +3,7 @@ import { getRhythmById, deleteRhythm, addXP } from '../utils/dataStore';
 import YouTubeEmbed from './YouTubeEmbed';
 import './RhythmDetail.css';
 
-export default function RhythmDetail({ rhythmId, username, onBack, onExercise, onDeleted }) {
+export default function RhythmDetail({ rhythmId, user, onBack, onExercise, onDeleted }) {
     const [rhythm, setRhythm] = useState(null);
 
     useEffect(() => {
@@ -49,7 +49,7 @@ export default function RhythmDetail({ rhythmId, username, onBack, onExercise, o
                                 <span>🥁 {rhythm.bpm} BPM</span>
                             </div>
                         </div>
-                        {username === rhythm.author && (
+                        {(user.isAdmin || user.name === rhythm.author) && (
                             <button className="delete-btn" onClick={handleDelete}>🗑️ Sil</button>
                         )}
                     </div>

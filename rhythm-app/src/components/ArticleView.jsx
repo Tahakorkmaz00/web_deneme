@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { getAllArticles, getCommentsByArticle, addComment, addReply, addXP, deleteArticle } from '../utils/dataStore';
+import { getAllArticles, getCommentsByArticle, addComment, addReply, addXP, deleteArticle, deleteComment, deleteReply } from '../utils/dataStore';
 import YouTubeEmbed from './YouTubeEmbed';
 import './ArticleView.css';
 
-export default function ArticleView({ articleId, isLoggedIn, username, onBack, onRequestLogin, onNavigate }) {
+export default function ArticleView({ articleId, isLoggedIn, user, onBack, onRequestLogin, onNavigate }) {
     const [article, setArticle] = useState(null);
     const [comments, setComments] = useState([]);
     const [newRhythm, setNewRhythm] = useState('');
@@ -37,7 +37,7 @@ export default function ArticleView({ articleId, isLoggedIn, username, onBack, o
 
         const comment = addComment({
             articleId: article.id,
-            author: username,
+            author: user.name,
             rhythm: newRhythm.trim(),
             message: newMessage.trim(),
         });
@@ -59,13 +59,27 @@ export default function ArticleView({ articleId, isLoggedIn, username, onBack, o
         if (!replyText.trim()) return;
 
         addReply(commentId, {
-            author: username,
+            author: user.name,
             message: replyText.trim(),
         });
 
         setComments(getCommentsByArticle(article.id));
         setReplyingTo(null);
         setReplyText('');
+    };
+
+    const handleDeleteComment = (commentId) => {
+        if (window.confirm('Bu yorumu silmek istediğinize emin misiniz?')) {
+            deleteComment(commentId);
+            setComments(getCommentsByArticle(article.id));
+        }
+    };
+
+    const handleDeleteReply = (commentId, replyId) => {
+        if (window.confirm('Bu yanıtı silmek istediğinize emin misiniz?')) {
+            deleteReply(commentId, replyId);
+            setComments(getCommentsByArticle(article.id));
+        }
     };
 
     const formatDate = (dateStr) => {
@@ -137,8 +151,8 @@ export default function ArticleView({ articleId, isLoggedIn, username, onBack, o
                     <div className="article-header-section">
                         <div className="article-header-top">
                             <span className="article-big-icon">{article.icon}</span>
-                            {/* Author Actions */}
-                            {username === article.author && (
+                            {/* Author or Admin Actions */}
+                            {(user.isAdmin || user.name === article.author) && (
                                 <div className="author-actions">
                                     <button className="edit-btn" onClick={handleEdit}>✏️ Düzenle</button>
                                     <button className="delete-btn" onClick={handleDelete}>🗑️ Sil</button>
@@ -172,7 +186,7 @@ export default function ArticleView({ articleId, isLoggedIn, username, onBack, o
                         <form className="new-comment-form" onSubmit={handleSubmitComment}>
                             <div className="comment-form-header">
                                 <span className="form-avatar">👤</span>
-                                <span className="form-username">{username}</span>
+                                <span className="form-username">{user.name}</span>
                             </div>
                             <div className="form-field">
                                 <label>🎵 Ritim Kalıbı <span className="required">*</span></label>
@@ -233,12 +247,22 @@ export default function ArticleView({ articleId, isLoggedIn, username, onBack, o
                                         </div>
                                         <p className="comment-message">{comment.message}</p>
                                         {isLoggedIn && (
-                                            <button
-                                                className="reply-btn"
-                                                onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
-                                            >
-                                                💬 Yanıtla
-                                            </button>
+                                            <div className="comment-actions">
+                                                <button
+                                                    className="reply-btn"
+                                                    onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
+                                                >
+                                                    💬 Yanıtla
+                                                </button>
+                                                {(user.isAdmin || user.name === comment.author) && (
+                                                    <button
+                                                        className="comment-delete-btn"
+                                                        onClick={() => handleDeleteComment(comment.id)}
+                                                    >
+                                                        🗑️ Sil
+                                                    </button>
+                                                )}
+                                            </div>
                                         )}
                                     </div>
 
@@ -251,6 +275,14 @@ export default function ArticleView({ articleId, isLoggedIn, username, onBack, o
                                                         <span className="comment-avatar">👤</span>
                                                         <span className="comment-author">{reply.author}</span>
                                                         <span className="comment-date">{formatDate(reply.createdAt)}</span>
+                                                        {(user.isAdmin || user.name === reply.author) && (
+                                                            <button
+                                                                className="reply-delete-btn"
+                                                                onClick={() => handleDeleteReply(comment.id, reply.id)}
+                                                            >
+                                                                🗑️
+                                                            </button>
+                                                        )}
                                                     </div>
                                                     <p className="comment-message">{reply.message}</p>
                                                 </div>

@@ -1,4 +1,7 @@
-// StrumFlow Data Store - localStorage based
+// StrumFlow Data Store - localStorage + Firestore
+
+import { db } from '../firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const KEYS = {
     RHYTHMS: 'strumflow_rhythms',
@@ -8,9 +11,10 @@ const KEYS = {
     CHORDS: 'strumflow_user_chords'
 };
 
-// --- User Chords (Repertoire) ---
+// --- User Chords (Repertoire) --- Firestore + localStorage fallback
 
-export function getUserChords() {
+// localStorage'dan oku (fallback)
+function getLocalChords() {
     try {
         const data = localStorage.getItem(KEYS.CHORDS);
         return data ? JSON.parse(data) : { mastered: [], learning: [] };
@@ -19,10 +23,39 @@ export function getUserChords() {
     }
 }
 
+// Firestore'dan kullanici akorlarini oku, fallback localStorage
+export async function getUserChords(uid) {
+    if (!uid) return getLocalChords();
+    try {
+        const ref = doc(db, 'users', uid, 'data', 'chords');
+        const snap = await getDoc(ref);
+        if (snap.exists()) {
+            const data = snap.data();
+            // localStorage'i da senkronize et
+            localStorage.setItem(KEYS.CHORDS, JSON.stringify(data));
+            return data;
+        }
+        // Firestore'da veri yoksa localStorage'dan al ve Firestore'a yaz
+        const local = getLocalChords();
+        if (local.mastered.length > 0 || local.learning.length > 0) {
+            await setDoc(ref, local);
+        }
+        return local;
+    } catch (err) {
+        console.warn('Firestore okunamadi, localStorage kullaniliyor:', err);
+        return getLocalChords();
+    }
+}
 
+// Senkron versiyon - component icinde aninda kullanmak icin
+export function getUserChordsLocal() {
+    return getLocalChords();
+}
 
-export function updateUserChord(chordId, status) {
-    const data = getUserChords();
+// Akor durumunu guncelle - Firestore + localStorage
+export async function updateUserChord(uid, chordId, status) {
+    // Once localStorage'dan oku
+    const data = getLocalChords();
 
     // Remove from all lists first
     data.mastered = data.mastered.filter(id => id !== chordId);
@@ -30,18 +63,25 @@ export function updateUserChord(chordId, status) {
 
     if (status === 'mastered') {
         data.mastered.push(chordId);
-        // Award XP for mastering a new chord (if not already mastered)
-        // Note: For simplicity, we just award it. In a real app, track 'first_time_mastered'.
-        // Let's assume re-mastering doesn't grant XP to avoid exploit, 
-        // but since we removed it first, we can't easily track history without more complex data.
-        // We'll just award 5 XP for the action for now.
         addXP(5);
     } else if (status === 'learning') {
         data.learning.push(chordId);
     }
 
+    // localStorage'a yaz
     localStorage.setItem(KEYS.CHORDS, JSON.stringify(data));
     window.dispatchEvent(new Event('chordsUpdated'));
+
+    // Firestore'a yaz (arka planda)
+    if (uid) {
+        try {
+            const ref = doc(db, 'users', uid, 'data', 'chords');
+            await setDoc(ref, { mastered: data.mastered, learning: data.learning });
+        } catch (err) {
+            console.warn('Firestore yazilamadi:', err);
+        }
+    }
+
     return data;
 }
 

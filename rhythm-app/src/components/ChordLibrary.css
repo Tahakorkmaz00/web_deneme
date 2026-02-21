@@ -86,7 +86,7 @@
 
 .search-container {
     max-width: 520px;
-    margin: 0 auto 44px;
+    margin: 0 auto 24px;
 }
 
 .chord-search {
@@ -104,8 +104,122 @@
 .chord-search:focus {
     outline: none;
     border-color: var(--accent-amber);
-    box-shadow: 0 0 0 3px rgba(212, 148, 58, 0.08);
+    box-shadow: 0 0 0 3px rgba(240, 168, 48, 0.08);
     background: var(--bg-card);
+}
+
+/* Difficulty Filters */
+.difficulty-filters {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+}
+
+.diff-filter-btn {
+    padding: 7px 18px;
+    border-radius: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+}
+
+.diff-filter-btn:hover:not(.active) {
+    border-color: var(--accent-amber);
+    color: var(--accent-amber);
+}
+
+.diff-filter-btn.active {
+    color: #0f0d0a;
+    font-weight: 600;
+}
+
+.diff-filter-btn.active:not(.beginner):not(.intermediate):not(.advanced) {
+    background: var(--accent-amber);
+    border-color: var(--accent-amber);
+}
+
+.diff-filter-btn.beginner.active {
+    background: #4ade80;
+    border-color: #4ade80;
+}
+
+.diff-filter-btn.intermediate.active {
+    background: #fbbf24;
+    border-color: #fbbf24;
+}
+
+.diff-filter-btn.advanced.active {
+    background: #f87171;
+    border-color: #f87171;
+}
+
+/* Difficulty Sections */
+.difficulty-section {
+    margin-bottom: 48px;
+}
+
+.difficulty-section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.diff-emoji {
+    font-size: 1.3rem;
+}
+
+.difficulty-section-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.diff-count {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    background: var(--subtle-bg);
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-left: auto;
+}
+
+/* Card Difficulty Badge */
+.card-diff-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-diff-badge.beginner {
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+}
+
+.card-diff-badge.intermediate {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+}
+
+.card-diff-badge.advanced {
+    background: rgba(248, 113, 113, 0.15);
+    color: #f87171;
 }
 
 .chord-grid {
@@ -129,7 +243,7 @@
 
 .chord-card.mastered {
     border-color: var(--accent-sage);
-    background: linear-gradient(to bottom, var(--bg-card), rgba(123, 158, 135, 0.03));
+    background: linear-gradient(to bottom, var(--bg-card), rgba(62, 201, 138, 0.03));
 }
 
 .chord-card.learning {
@@ -249,6 +363,237 @@
     color: #0f0d0a;
 }
 
+/* ========== CHORD DETAIL PAGE ========== */
+.chord-detail {
+    animation: fadeIn 0.4s ease-out;
+}
+
+.detail-back-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-bottom: 24px;
+    padding: 6px 0;
+    transition: color 0.3s;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+}
+
+.detail-back-btn:hover {
+    color: var(--accent-amber);
+}
+
+.detail-hero {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 48px;
+    padding: 32px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+}
+
+.detail-hero-left {
+    flex: 1;
+}
+
+.detail-diff-badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-diff-badge.beginner {
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+}
+
+.detail-diff-badge.intermediate {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+}
+
+.detail-diff-badge.advanced {
+    background: rgba(248, 113, 113, 0.15);
+    color: #f87171;
+}
+
+.detail-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -2px;
+    margin-bottom: 4px;
+    line-height: 1;
+}
+
+.detail-fullname {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+.detail-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.detail-actions {
+    display: flex;
+    gap: 10px;
+    max-width: 320px;
+}
+
+.detail-hero-right {
+    flex-shrink: 0;
+}
+
+.detail-diagram {
+    padding: 16px;
+    background: var(--subtle-bg);
+    border-radius: 12px;
+}
+
+/* Detail Sections */
+.detail-section {
+    margin-bottom: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 28px;
+}
+
+.detail-section h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Finger Table */
+.finger-table {
+    width: 100%;
+}
+
+.finger-table-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 10px 16px;
+    background: var(--subtle-bg);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.finger-table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.92rem;
+    transition: background 0.2s;
+}
+
+.finger-table-row:last-child {
+    border-bottom: none;
+}
+
+.finger-table-row:hover {
+    background: var(--subtle-bg);
+}
+
+.ft-string {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.ft-fret {
+    color: var(--accent-amber);
+    font-weight: 600;
+}
+
+.ft-finger {
+    color: var(--text-secondary);
+}
+
+/* Tips List */
+.tips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tips-list li {
+    padding: 12px 0 12px 28px;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.tips-list li:last-child {
+    border-bottom: none;
+}
+
+.tips-list li::before {
+    content: '→';
+    position: absolute;
+    left: 4px;
+    color: var(--accent-amber);
+    font-weight: 700;
+}
+
+/* Songs List */
+.songs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--subtle-bg);
+    border-radius: 8px;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    transition: transform 0.2s;
+}
+
+.song-item:hover {
+    transform: translateX(4px);
+}
+
+.song-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
 /* Repertoire View */
 .repertoire-view {
     animation: fadeIn 0.4s ease-out;
@@ -285,7 +630,7 @@
 
 .share-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(212, 148, 58, 0.2);
+    box-shadow: 0 4px 16px rgba(240, 168, 48, 0.2);
 }
 
 .repertoire-section {
@@ -312,6 +657,7 @@
     font-size: 0.88rem;
 }
 
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
     .chord-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -325,6 +671,38 @@
     .chord-svg {
         width: 100px;
         height: 120px;
+    }
+
+    .detail-hero {
+        flex-direction: column;
+        gap: 24px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .detail-name {
+        font-size: 2.5rem;
+    }
+
+    .detail-actions {
+        justify-content: center;
+        max-width: 100%;
+    }
+
+    .finger-table-header,
+    .finger-table-row {
+        font-size: 0.82rem;
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .difficulty-filters {
+        gap: 6px;
+    }
+
+    .diff-filter-btn {
+        padding: 6px 14px;
+        font-size: 0.8rem;
     }
 }
 

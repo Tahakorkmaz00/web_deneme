@@ -80,15 +80,15 @@ export default function CreateRhythm({ user, onBack, onCreated }) {
                             type="text"
                             value={strumPattern}
                             onChange={(e) => setStrumPattern(e.target.value)}
-                            placeholder="ör: ↓ ↓ ↑ ↓ ↑ veya D D U D U"
+                            placeholder="ör: ↓ ↓ ↑ ↓ ↑   |   x = kesme, - = es"
                             className="form-input strum-input"
                         />
                         <div className="strum-helpers">
                             <span className="helper-label">Hızlı ekle:</span>
                             <button type="button" className="strum-btn" onClick={() => setStrumPattern(p => p + '↓')}>↓</button>
                             <button type="button" className="strum-btn" onClick={() => setStrumPattern(p => p + '↑')}>↑</button>
-                            <button type="button" className="strum-btn" onClick={() => setStrumPattern(p => p + ' x')}>x</button>
-                            <button type="button" className="strum-btn" onClick={() => setStrumPattern(p => p + ' ')}>⎵</button>
+                            <button type="button" className="strum-btn" onClick={() => setStrumPattern(p => p + ' x')}>x kesme</button>
+                            <button type="button" className="strum-btn" onClick={() => setStrumPattern(p => p + ' -')}>- es</button>
                             <button type="button" className="strum-btn clear" onClick={() => setStrumPattern('')}>Temizle</button>
                         </div>
                     </div>

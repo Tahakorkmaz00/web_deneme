@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { auth } from './firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import Login from './components/Login';
 import HomeScreen from './components/HomeScreen';
 import Education from './components/Education';
@@ -13,14 +15,37 @@ import './App.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({ name: '', isAdmin: false });
+  const [user, setUser] = useState({ name: '', isAdmin: false, uid: null });
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
   const [pageData, setPageData] = useState({});
   const [exerciseRhythm, setExerciseRhythm] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('strumflow_theme') || 'dark';
   });
+
+  // Firebase auth state listener - sayfa yenilendiginde oturum korunur
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        // Email'den kullanici adini cikar (xxx@strumflow.app -> xxx)
+        const name = firebaseUser.email?.split('@')[0] || 'Kullanici';
+        setUser({ name, isAdmin: false, uid: firebaseUser.uid });
+        setIsLoggedIn(true);
+        setShowLoginModal(false);
+      } else {
+        // Sadece Firebase oturumu kapandiysa sifirla
+        // Admin girisi veya local giris durumunu korumak icin kontrol
+        if (user.uid) {
+          setIsLoggedIn(false);
+          setUser({ name: '', isAdmin: false, uid: null });
+        }
+      }
+      setAuthLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -31,15 +56,25 @@ function App() {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
+  // Admin girisi icin (logo 3x tiklama)
   const handleLogin = (name, isAdmin = false) => {
-    setUser({ name, isAdmin });
+    setUser({ name, isAdmin, uid: null });
     setIsLoggedIn(true);
     setShowLoginModal(false);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch {
+      // Firebase oturumu yoksa bile local state'i temizle
+    }
+    // Cikis yapinca kisisel verileri temizle
+    localStorage.removeItem('strumflow_user_chords');
+    localStorage.removeItem('strumflow_profile');
+    window.dispatchEvent(new Event('chordsUpdated'));
     setIsLoggedIn(false);
-    setUser({ name: '', isAdmin: false });
+    setUser({ name: '', isAdmin: false, uid: null });
   };
 
   const navigateTo = (page, data = {}) => {
@@ -185,7 +220,7 @@ function App() {
       <header>
         <div className="container">
           <div className="header-content">
-            <div className="logo" onClick={goHome}>StrumFlow</div>
+            <div className="logo" onClick={goHome}>StrumFlow Lab</div>
             <nav className="header-nav">
               <button
                 className={`header-nav-link${currentPage === 'education' || currentPage === 'article-view' || currentPage === 'create-article' || currentPage === 'edit-article' ? ' active' : ''}`}

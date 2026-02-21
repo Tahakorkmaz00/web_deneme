@@ -16,8 +16,8 @@
 }
 
 .guest-warning {
-    background: rgba(212, 148, 58, 0.06);
-    border: 1px solid rgba(212, 148, 58, 0.2);
+    background: rgba(240, 168, 48, 0.06);
+    border: 1px solid rgba(240, 168, 48, 0.2);
     color: var(--accent-amber);
     padding: 10px 14px;
     border-radius: 8px;
@@ -91,7 +91,7 @@
 
 .form-input:focus {
     border-color: var(--accent-amber);
-    box-shadow: 0 0 0 3px rgba(212, 148, 58, 0.08);
+    box-shadow: 0 0 0 3px rgba(240, 168, 48, 0.08);
 }
 
 .form-textarea {
@@ -111,16 +111,16 @@
 
 .form-textarea:focus {
     border-color: var(--accent-amber);
-    box-shadow: 0 0 0 3px rgba(212, 148, 58, 0.08);
+    box-shadow: 0 0 0 3px rgba(240, 168, 48, 0.08);
 }
 
 .content-hint {
     font-size: 0.78rem;
     color: var(--text-secondary);
-    background: rgba(212, 148, 58, 0.04);
+    background: rgba(240, 168, 48, 0.04);
     padding: 8px 12px;
     border-radius: 6px;
-    border: 1px solid rgba(212, 148, 58, 0.08);
+    border: 1px solid rgba(240, 168, 48, 0.08);
 }
 
 .content-hint code {
@@ -159,8 +159,8 @@
 
 .emoji-picker .picker-item.active {
     border-color: var(--accent-amber);
-    background: rgba(212, 148, 58, 0.08);
-    box-shadow: 0 0 0 3px rgba(212, 148, 58, 0.08);
+    background: rgba(240, 168, 48, 0.08);
+    box-shadow: 0 0 0 3px rgba(240, 168, 48, 0.08);
     transform: scale(1.05);
 }
 
@@ -260,7 +260,7 @@
 
 .submit-article-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(212, 148, 58, 0.25);
+    box-shadow: 0 8px 28px rgba(240, 168, 48, 0.25);
 }
 
 .submit-article-btn:disabled {

@@ -72,7 +72,7 @@
 .form-input:focus {
     outline: none;
     border-color: var(--accent-sage);
-    box-shadow: 0 0 0 3px rgba(123, 158, 135, 0.08);
+    box-shadow: 0 0 0 3px rgba(62, 201, 138, 0.08);
 }
 
 .strum-input {
@@ -95,8 +95,8 @@
 }
 
 .strum-btn {
-    background: rgba(123, 158, 135, 0.06);
-    border: 1px solid rgba(123, 158, 135, 0.15);
+    background: rgba(62, 201, 138, 0.06);
+    border: 1px solid rgba(62, 201, 138, 0.15);
     color: var(--accent-sage);
     padding: 5px 12px;
     border-radius: 4px;
@@ -107,12 +107,12 @@
 }
 
 .strum-btn:hover {
-    background: rgba(123, 158, 135, 0.12);
+    background: rgba(62, 201, 138, 0.12);
 }
 
 .strum-btn.clear {
-    background: rgba(196, 107, 124, 0.06);
-    border-color: rgba(196, 107, 124, 0.15);
+    background: rgba(224, 84, 116, 0.06);
+    border-color: rgba(224, 84, 116, 0.15);
     color: var(--accent-rose);
     font-size: 0.78rem;
 }
@@ -247,7 +247,7 @@
 }
 
 .add-chord-btn:hover:not(:disabled) {
-    box-shadow: 0 4px 14px rgba(123, 158, 135, 0.25);
+    box-shadow: 0 4px 14px rgba(62, 201, 138, 0.25);
 }
 
 .add-chord-btn:disabled {
@@ -267,8 +267,8 @@
     align-items: center;
     gap: 6px;
     padding: 8px 12px;
-    background: rgba(123, 158, 135, 0.04);
-    border: 1px solid rgba(123, 158, 135, 0.1);
+    background: rgba(62, 201, 138, 0.04);
+    border: 1px solid rgba(62, 201, 138, 0.1);
     border-radius: 6px;
     transition: all 0.2s;
 }
@@ -330,7 +330,7 @@
 
 .publish-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(123, 158, 135, 0.25);
+    box-shadow: 0 8px 28px rgba(62, 201, 138, 0.25);
 }
 
 .publish-btn:disabled {

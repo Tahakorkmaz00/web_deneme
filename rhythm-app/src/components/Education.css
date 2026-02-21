@@ -146,8 +146,8 @@
     align-items: center;
     gap: 14px;
     padding: 18px 22px;
-    background: rgba(212, 148, 58, 0.04);
-    border: 1px solid rgba(212, 148, 58, 0.12);
+    background: rgba(240, 168, 48, 0.04);
+    border: 1px solid rgba(240, 168, 48, 0.12);
     border-radius: 8px;
 }
 
@@ -186,7 +186,7 @@
 
 .add-article-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(212, 148, 58, 0.25);
+    box-shadow: 0 6px 24px rgba(240, 168, 48, 0.25);
 }
 
 /* Author Tag */

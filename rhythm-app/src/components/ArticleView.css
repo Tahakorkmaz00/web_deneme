@@ -70,13 +70,13 @@
 }
 
 .delete-btn {
-    background: rgba(196, 107, 124, 0.08);
+    background: rgba(224, 84, 116, 0.08);
     color: var(--accent-rose);
-    border: 1px solid rgba(196, 107, 124, 0.15);
+    border: 1px solid rgba(224, 84, 116, 0.15);
 }
 
 .delete-btn:hover {
-    background: rgba(196, 107, 124, 0.15);
+    background: rgba(224, 84, 116, 0.15);
 }
 
 .article-header-section h1 {
@@ -163,7 +163,7 @@
 }
 
 .comment-count {
-    background: rgba(212, 148, 58, 0.08);
+    background: rgba(240, 168, 48, 0.08);
     color: var(--accent-amber);
     padding: 4px 12px;
     border-radius: 4px;
@@ -255,7 +255,7 @@
 
 .submit-comment-btn:hover:not(:disabled) {
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(212, 148, 58, 0.25);
+    box-shadow: 0 6px 20px rgba(240, 168, 48, 0.25);
 }
 
 .submit-comment-btn:disabled {
@@ -294,7 +294,7 @@
 
 .login-prompt-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(212, 148, 58, 0.25);
+    box-shadow: 0 4px 16px rgba(240, 168, 48, 0.25);
 }
 
 /* Comments List */
@@ -357,8 +357,8 @@
     align-items: center;
     gap: 8px;
     padding: 9px 12px;
-    background: rgba(212, 148, 58, 0.04);
-    border: 1px solid rgba(212, 148, 58, 0.1);
+    background: rgba(240, 168, 48, 0.04);
+    border: 1px solid rgba(240, 168, 48, 0.1);
     border-radius: 6px;
     margin-bottom: 10px;
 }
@@ -475,7 +475,7 @@
 }
 
 .send-reply-btn:hover:not(:disabled) {
-    box-shadow: 0 3px 12px rgba(212, 148, 58, 0.2);
+    box-shadow: 0 3px 12px rgba(240, 168, 48, 0.2);
 }
 
 .send-reply-btn:disabled {

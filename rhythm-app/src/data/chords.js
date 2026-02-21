@@ -1,152 +1,401 @@
 export const CHORDS = [
+    // ===== BAŞLANGIÇ (Beginner) =====
+    {
+        id: 'em',
+        name: 'Em',
+        fullName: 'E Minor',
+        difficulty: 'beginner',
+        description: 'Karanlık ve derin. Metal ve Rock şarkılarının favorisi.',
+        frets: [0, 2, 2, 0, 0, 0],
+        fingers: [0, 2, 3, 0, 0, 0],
+        tips: [
+            'Gitarda öğrenilecek en kolay akordur - sadece 2 parmak kullanılır.',
+            'Orta parmağını 5. telin 2. perdesine, yüzük parmağını 4. telin 2. perdesine koy.',
+            'Tüm tellere serbestçe vurabilirsin, hepsi açık veya basılı.',
+            'Em → G geçişi çok doğaldır, birlikte pratik yap.',
+        ],
+        fingerPlacement: [
+            { string: '5. tel (A)', fret: '2. perde', finger: 'Orta parmak' },
+            { string: '4. tel (D)', fret: '2. perde', finger: 'Yüzük parmak' },
+        ],
+        commonSongs: ['Nothing Else Matters - Metallica', 'Wish You Were Here - Pink Floyd', 'Horse With No Name - America'],
+    },
     {
         id: 'am',
         name: 'Am',
         fullName: 'A Minor',
+        difficulty: 'beginner',
         description: 'Melankolik ve duygusal. Rock ve pop müzikte en sık kullanılan minör akor.',
-        frets: [-1, 0, 2, 2, 1, 0], // Strings: E A D G B e (-1=mute, 0=open, >0=fret)
-        fingers: [0, 0, 2, 3, 1, 0], // Fingers: 1=Index, 2=Middle, 3=Ring, 4=Pinky
-    },
-    {
-        id: 'c',
-        name: 'C',
-        fullName: 'C Major',
-        description: 'Parlak ve mutlu. Çoğu popüler şarkının temel taşı.',
-        frets: [-1, 3, 2, 0, 1, 0],
-        fingers: [0, 3, 2, 0, 1, 0],
-    },
-    {
-        id: 'd',
-        name: 'D',
-        fullName: 'D Major',
-        description: 'Neşeli ve enerjik. Genellikle şarkıların nakarat kısımlarında duyulur.',
-        frets: [-1, -1, 0, 2, 3, 2],
-        fingers: [0, 0, 0, 1, 3, 2],
-    },
-    {
-        id: 'dm',
-        name: 'Dm',
-        fullName: 'D Minor',
-        description: 'Hüzünlü ama umutlu. Baladların vazgeçilmezi.',
-        frets: [-1, -1, 0, 2, 3, 1],
-        fingers: [0, 0, 0, 2, 3, 1],
+        frets: [-1, 0, 2, 2, 1, 0],
+        fingers: [0, 0, 2, 3, 1, 0],
+        tips: [
+            'İşaret parmağını 2. telin 1. perdesine, orta parmağını 4. telin 2. perdesine, yüzük parmağını 3. telin 2. perdesine koy.',
+            '6. tel (kalın E) çalınmaz - sadece 5 teli vur.',
+            'Am → C geçişi çok yaygındır, yüzük parmağın yerinde kalır.',
+            'Am → Em geçişi de kolaydır, sık pratik yap.',
+        ],
+        fingerPlacement: [
+            { string: '2. tel (B)', fret: '1. perde', finger: 'İşaret parmak' },
+            { string: '4. tel (D)', fret: '2. perde', finger: 'Orta parmak' },
+            { string: '3. tel (G)', fret: '2. perde', finger: 'Yüzük parmak' },
+        ],
+        commonSongs: ['Stairway to Heaven - Led Zeppelin', 'Losing My Religion - R.E.M.', 'House of the Rising Sun - Animals'],
     },
     {
         id: 'e',
         name: 'E',
         fullName: 'E Major',
+        difficulty: 'beginner',
         description: 'Güçlü ve dolu. Rock ve Blues müziğin kralı.',
         frets: [0, 2, 2, 1, 0, 0],
         fingers: [0, 2, 3, 1, 0, 0],
-    },
-    {
-        id: 'em',
-        name: 'Em',
-        fullName: 'E Minor',
-        description: 'Karanlık ve derin. Metal ve Rock şarkılarının favorisi.',
-        frets: [0, 2, 2, 0, 0, 0],
-        fingers: [0, 2, 3, 0, 0, 0],
-    },
-    {
-        id: 'g',
-        name: 'G',
-        fullName: 'G Major',
-        description: 'Geniş ve ferah. Akustik gitarın en sevilen akoru.',
-        frets: [3, 2, 0, 0, 0, 3],
-        fingers: [2, 1, 0, 0, 0, 3],
+        tips: [
+            'Am akorunun bir tel aşağı kaydırılmış halidir.',
+            'Tüm 6 tel çalınır - en dolgun akorlardan biridir.',
+            'İşaret parmağını 3. telin 1. perdesine koy, orta ve yüzük parmakları 4. ve 5. tellerin 2. perdelerine.',
+            'Blues ve Rock şarkılarda çok sık kullanılır.',
+        ],
+        fingerPlacement: [
+            { string: '3. tel (G)', fret: '1. perde', finger: 'İşaret parmak' },
+            { string: '5. tel (A)', fret: '2. perde', finger: 'Orta parmak' },
+            { string: '4. tel (D)', fret: '2. perde', finger: 'Yüzük parmak' },
+        ],
+        commonSongs: ['Back in Black - AC/DC', 'Smoke on the Water - Deep Purple', 'Seven Nation Army - White Stripes'],
     },
     {
         id: 'a',
         name: 'A',
         fullName: 'A Major',
+        difficulty: 'beginner',
         description: 'Pozitif ve aydınlık. Yükselen bir hissiyat verir.',
         frets: [-1, 0, 2, 2, 2, 0],
         fingers: [0, 0, 1, 2, 3, 0],
+        tips: [
+            '3 parmak yan yana 2. perde üzerinde durur - kompakt bir şekildir.',
+            '6. tel çalınmaz, 5. tel açık çalınır.',
+            'Parmakları hafif dikey tutarak teller birbirine değmesin.',
+            'A → D → E klasik rock ilerlemesidir.',
+        ],
+        fingerPlacement: [
+            { string: '4. tel (D)', fret: '2. perde', finger: 'İşaret parmak' },
+            { string: '3. tel (G)', fret: '2. perde', finger: 'Orta parmak' },
+            { string: '2. tel (B)', fret: '2. perde', finger: 'Yüzük parmak' },
+        ],
+        commonSongs: ['Knockin on Heavens Door - Bob Dylan', 'Brown Eyed Girl - Van Morrison', 'Hey Jude - Beatles'],
     },
     {
-        id: 'f',
-        name: 'F',
-        fullName: 'F Major',
-        description: 'Zorlu bare akoru. Geçişlerde zenginlik katar.',
-        frets: [1, 3, 3, 2, 1, 1],
-        fingers: [1, 3, 4, 2, 1, 1],
-        barre: { fret: 1, from: 1, to: 6 } // Barre 1st fret, strings 1-6
+        id: 'd',
+        name: 'D',
+        fullName: 'D Major',
+        difficulty: 'beginner',
+        description: 'Neşeli ve enerjik. Genellikle şarkıların nakarat kısımlarında duyulur.',
+        frets: [-1, -1, 0, 2, 3, 2],
+        fingers: [0, 0, 0, 1, 3, 2],
+        tips: [
+            'Sadece ince 4 tel çalınır (D, G, B, e).',
+            'Üçgen şeklinde bir pozisyon oluşturur.',
+            'İşaret parmağı 3. tel 2. perde, orta parmak 1. tel 2. perde, yüzük parmak 2. tel 3. perde.',
+            'D → A geçişi çok yaygın ve kolaydır.',
+        ],
+        fingerPlacement: [
+            { string: '3. tel (G)', fret: '2. perde', finger: 'İşaret parmak' },
+            { string: '1. tel (e)', fret: '2. perde', finger: 'Orta parmak' },
+            { string: '2. tel (B)', fret: '3. perde', finger: 'Yüzük parmak' },
+        ],
+        commonSongs: ['Sweet Home Alabama - Lynyrd Skynyrd', 'Here Comes the Sun - Beatles', 'Wonderwall - Oasis'],
     },
     {
-        id: 'bm',
-        name: 'Bm',
-        fullName: 'B Minor',
-        description: 'Duygusal ve yoğun. Rock baladlarının vazgeçilmezi.',
-        frets: [-1, 2, 4, 4, 3, 2],
-        fingers: [0, 1, 3, 4, 2, 1],
-        barre: { fret: 2, from: 1, to: 5 }
+        id: 'dm',
+        name: 'Dm',
+        fullName: 'D Minor',
+        difficulty: 'beginner',
+        description: 'Hüzünlü ama umutlu. Baladların vazgeçilmezi.',
+        frets: [-1, -1, 0, 2, 3, 1],
+        fingers: [0, 0, 0, 2, 3, 1],
+        tips: [
+            'D Major\'e çok benzer ama 1. tel 1. perdeye iner.',
+            'İşaret parmağı 1. tel 1. perde, orta parmak 3. tel 2. perde, yüzük parmak 2. tel 3. perde.',
+            'Sadece ince 4 tel çalınır.',
+            'Dm → Am → E klasik bir ilerleme örneğidir.',
+        ],
+        fingerPlacement: [
+            { string: '1. tel (e)', fret: '1. perde', finger: 'İşaret parmak' },
+            { string: '3. tel (G)', fret: '2. perde', finger: 'Orta parmak' },
+            { string: '2. tel (B)', fret: '3. perde', finger: 'Yüzük parmak' },
+        ],
+        commonSongs: ['Sultans of Swing - Dire Straits', 'Californication - RHCP', 'The Sound of Silence - Simon & Garfunkel'],
     },
+    {
+        id: 'c',
+        name: 'C',
+        fullName: 'C Major',
+        difficulty: 'beginner',
+        description: 'Parlak ve mutlu. Çoğu popüler şarkının temel taşı.',
+        frets: [-1, 3, 2, 0, 1, 0],
+        fingers: [0, 3, 2, 0, 1, 0],
+        tips: [
+            'Parmaklar 3 farklı perdeye yayılır - geniş bir açılım gerektirir.',
+            'İşaret parmağı 2. tel 1. perde, orta parmak 4. tel 2. perde, yüzük parmak 5. tel 3. perde.',
+            '6. tel çalınmaz.',
+            'C → G → Am → F dünyanın en popüler akor ilerlemesidir.',
+        ],
+        fingerPlacement: [
+            { string: '2. tel (B)', fret: '1. perde', finger: 'İşaret parmak' },
+            { string: '4. tel (D)', fret: '2. perde', finger: 'Orta parmak' },
+            { string: '5. tel (A)', fret: '3. perde', finger: 'Yüzük parmak' },
+        ],
+        commonSongs: ['Let It Be - Beatles', 'No Woman No Cry - Bob Marley', 'Someone Like You - Adele'],
+    },
+    {
+        id: 'g',
+        name: 'G',
+        fullName: 'G Major',
+        difficulty: 'beginner',
+        description: 'Geniş ve ferah. Akustik gitarın en sevilen akoru.',
+        frets: [3, 2, 0, 0, 0, 3],
+        fingers: [2, 1, 0, 0, 0, 3],
+        tips: [
+            'Tüm 6 tel çalınır - çok dolgun bir ses verir.',
+            'Orta parmak 6. tel 3. perde, işaret parmak 5. tel 2. perde, yüzük parmak 1. tel 3. perde.',
+            'G → C geçişinde orta parmak kayarak gider, bunu pratik et.',
+            'G → Em geçişi en kolay geçişlerden biridir.',
+        ],
+        fingerPlacement: [
+            { string: '5. tel (A)', fret: '2. perde', finger: 'İşaret parmak' },
+            { string: '6. tel (E)', fret: '3. perde', finger: 'Orta parmak' },
+            { string: '1. tel (e)', fret: '3. perde', finger: 'Yüzük parmak' },
+        ],
+        commonSongs: ['Wish You Were Here - Pink Floyd', 'Wonderwall - Oasis', 'Country Roads - John Denver'],
+    },
+
+    // ===== ORTA SEVİYE (Intermediate) =====
     {
         id: 'b7',
         name: 'B7',
         fullName: 'B Dominant 7',
+        difficulty: 'intermediate',
         description: 'Blues tonlarında sıkça kullanılan gergin ama çözülmeyi bekleyen bir akor.',
         frets: [-1, 2, 1, 2, 0, 2],
         fingers: [0, 2, 1, 3, 0, 4],
+        tips: [
+            '4 parmağın hepsini kullanırsın - parmak bağımsızlığı geliştirir.',
+            'İşaret parmağı 4. tel 1. perde, orta parmak 5. tel 2. perde, yüzük parmak 3. tel 2. perde, serçe parmak 1. tel 2. perde.',
+            'B7 → Em çok güçlü bir çözülme sağlar.',
+            'Blues ilerlemelerinde mutlaka karşılaşırsın.',
+        ],
+        fingerPlacement: [
+            { string: '4. tel (D)', fret: '1. perde', finger: 'İşaret parmak' },
+            { string: '5. tel (A)', fret: '2. perde', finger: 'Orta parmak' },
+            { string: '3. tel (G)', fret: '2. perde', finger: 'Yüzük parmak' },
+            { string: '1. tel (e)', fret: '2. perde', finger: 'Serçe parmak' },
+        ],
+        commonSongs: ['Hey Joe - Jimi Hendrix', 'Folsom Prison Blues - Johnny Cash', 'Dust in the Wind - Kansas'],
     },
     {
         id: 'cadd9',
         name: 'Cadd9',
         fullName: 'C Added 9',
+        difficulty: 'intermediate',
         description: 'G akoruna geçişi çok kolay olan, modern pop ve country favorisi.',
         frets: [-1, 3, 2, 0, 3, 3],
         fingers: [0, 2, 1, 0, 3, 4],
+        tips: [
+            'C Major\'e çok benzer ama 1. ve 2. telde farklılık var.',
+            'G akoruna geçerken sadece 2 parmak hareket eder.',
+            'Açık ve şıngırdayan bir ses verir - akustik gitar için mükemmel.',
+            'Wonderwall gibi şarkılarda G yerine kullanılır.',
+        ],
+        fingerPlacement: [
+            { string: '4. tel (D)', fret: '2. perde', finger: 'İşaret parmak' },
+            { string: '5. tel (A)', fret: '3. perde', finger: 'Orta parmak' },
+            { string: '2. tel (B)', fret: '3. perde', finger: 'Yüzük parmak' },
+            { string: '1. tel (e)', fret: '3. perde', finger: 'Serçe parmak' },
+        ],
+        commonSongs: ['Wonderwall - Oasis', 'Good Riddance - Green Day', 'Yellow - Coldplay'],
     },
-    // --- Power Chords ---
     {
         id: 'a5',
         name: 'A5',
         fullName: 'A Power Chord',
+        difficulty: 'intermediate',
         description: 'Rock ve Metal müziğin temeli. Sadece kök ses ve 5. dereceden oluşur.',
-        frets: [-1, 0, 2, 2, -1, -1], // Open A5 (Root 5)
+        frets: [-1, 0, 2, 2, -1, -1],
         fingers: [0, 0, 1, 1, 0, 0],
+        tips: [
+            'Power chord\'lar ne majör ne minördür - nötr ve güçlü bir ses verir.',
+            'İşaret parmağını 4. ve 3. tellerin 2. perdesine yatır (mini barre).',
+            'Distortion pedal ile harika bir ses çıkarır.',
+            'Sadece 2-3 tel çalınır, diğerlerini sustur.',
+        ],
+        fingerPlacement: [
+            { string: '5. tel (A)', fret: 'Açık', finger: '-' },
+            { string: '4. tel (D)', fret: '2. perde', finger: 'İşaret parmak' },
+            { string: '3. tel (G)', fret: '2. perde', finger: 'İşaret parmak (barre)' },
+        ],
+        commonSongs: ['Smells Like Teen Spirit - Nirvana', 'Iron Man - Black Sabbath', 'TNT - AC/DC'],
     },
     {
         id: 'e5',
         name: 'E5',
         fullName: 'E Power Chord',
+        difficulty: 'intermediate',
         description: 'En kalın, en güçlü akor. Distortion ile harika tınlar.',
-        frets: [0, 2, 2, -1, -1, -1], // Open E5 (Root 6)
+        frets: [0, 2, 2, -1, -1, -1],
         fingers: [0, 1, 1, 0, 0, 0],
+        tips: [
+            'Sadece kalın 3 tel çalınır.',
+            'Açık E teli kök ses olarak çalar.',
+            'Drop D akort ile daha da kolay hale gelir.',
+            'Metal rifflerinin yapı taşıdır.',
+        ],
+        fingerPlacement: [
+            { string: '6. tel (E)', fret: 'Açık', finger: '-' },
+            { string: '5. tel (A)', fret: '2. perde', finger: 'İşaret parmak' },
+            { string: '4. tel (D)', fret: '2. perde', finger: 'İşaret parmak (barre)' },
+        ],
+        commonSongs: ['Smoke on the Water - Deep Purple', 'You Really Got Me - The Kinks', 'Blitzkrieg Bop - Ramones'],
     },
     {
         id: 'f5',
         name: 'F5',
         fullName: 'F Power Chord',
+        difficulty: 'intermediate',
         description: 'Sert ve keskin. Punk ve Grunge parçalarında sıkça kullanılır.',
-        frets: [1, 3, 3, -1, -1, -1], // F5 (Root 6)
+        frets: [1, 3, 3, -1, -1, -1],
         fingers: [1, 3, 4, 0, 0, 0],
+        tips: [
+            'E5 şeklinin 1 perde kaydırılmış halidir.',
+            'İşaret parmağı 6. tel 1. perde, yüzük ve serçe parmaklar 5. ve 4. teller 3. perde.',
+            'F bare akorunun basitleştirilmiş halidir - önce bunu öğren.',
+            'Hızlı perde geçişleri için ideal.',
+        ],
+        fingerPlacement: [
+            { string: '6. tel (E)', fret: '1. perde', finger: 'İşaret parmak' },
+            { string: '5. tel (A)', fret: '3. perde', finger: 'Yüzük parmak' },
+            { string: '4. tel (D)', fret: '3. perde', finger: 'Serçe parmak' },
+        ],
+        commonSongs: ['Basket Case - Green Day', 'Brain Stew - Green Day', 'American Idiot - Green Day'],
     },
     {
         id: 'g5',
         name: 'G5',
         fullName: 'G Power Chord',
+        difficulty: 'intermediate',
         description: 'Güçlü ve dolgun. Rock rifflerinin vazgeçilmezi.',
-        frets: [3, 5, 5, -1, -1, -1], // G5 (Root 6)
+        frets: [3, 5, 5, -1, -1, -1],
         fingers: [1, 3, 4, 0, 0, 0],
+        tips: [
+            'E5 şeklinin 3. perdeden başlayan versiyonudur.',
+            'İşaret parmağı 6. tel 3. perde, yüzük ve serçe parmak 5. ve 4. teller 5. perde.',
+            'G5 → A5 → C5 çok yaygın bir power chord ilerlemesidir.',
+            'Rock ve punk şarkılarda sürekli kullanılır.',
+        ],
+        fingerPlacement: [
+            { string: '6. tel (E)', fret: '3. perde', finger: 'İşaret parmak' },
+            { string: '5. tel (A)', fret: '5. perde', finger: 'Yüzük parmak' },
+            { string: '4. tel (D)', fret: '5. perde', finger: 'Serçe parmak' },
+        ],
+        commonSongs: ['Highway to Hell - AC/DC', 'Paranoid - Black Sabbath', 'Rock You Like a Hurricane - Scorpions'],
     },
     {
         id: 'c5',
         name: 'C5',
         fullName: 'C Power Chord',
+        difficulty: 'intermediate',
         description: 'Net ve güçlü. Pop-punk ve alternatif rock şarkılarında popüler.',
-        frets: [-1, 3, 5, 5, -1, -1], // C5 (Root 5)
+        frets: [-1, 3, 5, 5, -1, -1],
         fingers: [0, 1, 3, 4, 0, 0],
+        tips: [
+            '5. telden başlayan power chord şeklidir.',
+            'İşaret parmağı 5. tel 3. perde, yüzük ve serçe parmak 4. ve 3. teller 5. perde.',
+            'A5 şeklinin 3 perde yukarı kaydırılmış halidir.',
+            'Pop-punk ve alternatif rock\'ta çok yaygın.',
+        ],
+        fingerPlacement: [
+            { string: '5. tel (A)', fret: '3. perde', finger: 'İşaret parmak' },
+            { string: '4. tel (D)', fret: '5. perde', finger: 'Yüzük parmak' },
+            { string: '3. tel (G)', fret: '5. perde', finger: 'Serçe parmak' },
+        ],
+        commonSongs: ['Dammit - Blink 182', 'All The Small Things - Blink 182', 'Sugar We\'re Goin Down - Fall Out Boy'],
     },
     {
         id: 'd5',
         name: 'D5',
         fullName: 'D Power Chord',
+        difficulty: 'intermediate',
         description: 'Hızlı ve atak. Hard Rock parçalarında sıkça duyulur.',
-        frets: [-1, 5, 7, 7, -1, -1], // D5 (Root 5)
+        frets: [-1, 5, 7, 7, -1, -1],
         fingers: [0, 1, 3, 4, 0, 0],
-    }
+        tips: [
+            'Yüksek perdelerden çalınan bir power chord.',
+            'İşaret parmağı 5. tel 5. perde, yüzük ve serçe parmak 4. ve 3. teller 7. perde.',
+            'A5 şeklinin 5. perdeden başlamasıdır.',
+            'Hard rock ve metal\'de sıkça kullanılır.',
+        ],
+        fingerPlacement: [
+            { string: '5. tel (A)', fret: '5. perde', finger: 'İşaret parmak' },
+            { string: '4. tel (D)', fret: '7. perde', finger: 'Yüzük parmak' },
+            { string: '3. tel (G)', fret: '7. perde', finger: 'Serçe parmak' },
+        ],
+        commonSongs: ['Enter Sandman - Metallica', 'Master of Puppets - Metallica', 'Crazy Train - Ozzy Osbourne'],
+    },
+
+    // ===== ZOR (Advanced) =====
+    {
+        id: 'f',
+        name: 'F',
+        fullName: 'F Major',
+        difficulty: 'advanced',
+        description: 'Zorlu bare akoru. Geçişlerde zenginlik katar.',
+        frets: [1, 3, 3, 2, 1, 1],
+        fingers: [1, 3, 4, 2, 1, 1],
+        barre: { fret: 1, from: 1, to: 6 },
+        tips: [
+            'İlk bare akor - işaret parmağın tüm telleri 1. perdede basması gerekir.',
+            'İşaret parmağını biraz yana yatır (kemik kısmıyla bas).',
+            'Başparmağını sapın arkasında, orta hizaya koy - güç buradan gelir.',
+            'Başta zor gelir ama bare akorların kapısını açar. Her gün 5 dakika pratik yap.',
+            'Önce sadece bare kısmını çalıştır, tüm teller temiz çalana kadar.',
+        ],
+        fingerPlacement: [
+            { string: 'Tüm teller', fret: '1. perde', finger: 'İşaret parmak (Bare)' },
+            { string: '3. tel (G)', fret: '2. perde', finger: 'Orta parmak' },
+            { string: '5. tel (A)', fret: '3. perde', finger: 'Yüzük parmak' },
+            { string: '4. tel (D)', fret: '3. perde', finger: 'Serçe parmak' },
+        ],
+        commonSongs: ['Hotel California - Eagles', 'Hey There Delilah - Plain White T\'s', 'Can\'t Help Falling in Love - Elvis'],
+    },
+    {
+        id: 'bm',
+        name: 'Bm',
+        fullName: 'B Minor',
+        difficulty: 'advanced',
+        description: 'Duygusal ve yoğun. Rock baladlarının vazgeçilmezi.',
+        frets: [-1, 2, 4, 4, 3, 2],
+        fingers: [0, 1, 3, 4, 2, 1],
+        barre: { fret: 2, from: 1, to: 5 },
+        tips: [
+            'Am bare şeklinin 2. perdeden başlayan versiyonudur.',
+            'İşaret parmağın 2. perdede 1-5. telleri basar.',
+            'F akorunu rahat çalabiliyorsan Bm daha kolay gelecektir.',
+            '6. tel çalınmaz - sadece 5 tel.',
+            'Bm → D → G → A çok popüler bir ilerleme.',
+        ],
+        fingerPlacement: [
+            { string: '1-5. teller', fret: '2. perde', finger: 'İşaret parmak (Bare)' },
+            { string: '2. tel (B)', fret: '3. perde', finger: 'Orta parmak' },
+            { string: '4. tel (D)', fret: '4. perde', finger: 'Yüzük parmak' },
+            { string: '3. tel (G)', fret: '4. perde', finger: 'Serçe parmak' },
+        ],
+        commonSongs: ['Zombie - Cranberries', 'Nothing Else Matters - Metallica', 'Creep - Radiohead'],
+    },
 ];
+
+export const DIFFICULTY_LABELS = {
+    beginner: 'Başlangıç',
+    intermediate: 'Orta Düzey',
+    advanced: 'Zor',
+};
 
 export function searchChords(query) {
     const q = query.toLowerCase().trim();
@@ -155,4 +404,9 @@ export function searchChords(query) {
         chord.name.toLowerCase().includes(q) ||
         chord.fullName.toLowerCase().includes(q)
     );
+}
+
+export function getChordsByDifficulty(difficulty) {
+    if (!difficulty || difficulty === 'all') return CHORDS;
+    return CHORDS.filter(chord => chord.difficulty === difficulty);
 }

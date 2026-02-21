@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './', // Ensures assets work on GitHub Pages
+  base: '/web_deneme/', // Set for deployment in /web_deneme/ subfolder
   plugins: [
     react(),
     VitePWA({

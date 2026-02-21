@@ -11,6 +11,7 @@ export default function CreateRhythm({ user, onBack, onCreated }) {
     const [strumPattern, setStrumPattern] = useState('↓ ↓ ↑ ↓ ↑');
     const [bpm, setBpm] = useState(100);
     const [youtubeUrl, setYoutubeUrl] = useState('');
+    const [submitting, setSubmitting] = useState(false);
 
     const allChords = getAllChords();
 
@@ -27,26 +28,30 @@ export default function CreateRhythm({ user, onBack, onCreated }) {
         setChords(chords.filter((_, i) => i !== index));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!title.trim() || chords.length === 0) return;
+        if (!title.trim() || chords.length === 0 || submitting) return;
 
-        const rhythm = addRhythm({
-            title: title.trim(),
-            chords,
-            strumPattern: strumPattern.trim(),
-            bpm,
-            author: user.name,
-            youtubeUrl: youtubeUrl.trim(),
-        });
+        setSubmitting(true);
+        try {
+            const rhythm = await addRhythm({
+                title: title.trim(),
+                chords,
+                strumPattern: strumPattern.trim(),
+                bpm,
+                author: user.name,
+                youtubeUrl: youtubeUrl.trim(),
+            });
 
-        if (rhythm) {
-            // Gamification: Add 50 XP
-            const result = addXP(50);
-            if (result.leveledUp) {
-                alert(`🎉 TEBRİKLER!\nSeviye Atladın: ${result.newLevel}`);
+            if (rhythm) {
+                const result = addXP(50);
+                if (result.leveledUp) {
+                    alert(`🎉 TEBRİKLER!\nSeviye Atladın: ${result.newLevel}`);
+                }
+                onCreated(rhythm);
             }
-            onCreated(rhythm);
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -178,9 +183,9 @@ export default function CreateRhythm({ user, onBack, onCreated }) {
                         <button
                             type="submit"
                             className="submit-btn"
-                            disabled={!title.trim() || chords.length === 0}
+                            disabled={!title.trim() || chords.length === 0 || submitting}
                         >
-                            💾 Ritmi Kaydet
+                            {submitting ? '⏳ Kaydediliyor...' : '💾 Ritmi Kaydet'}
                         </button>
                     </div>
                 </form>

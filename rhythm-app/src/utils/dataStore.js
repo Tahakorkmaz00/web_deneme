@@ -1,7 +1,7 @@
 // StrumFlow Data Store - localStorage + Firestore
 
 import { db } from '../firebase';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, collection, addDoc, deleteDoc, query, orderBy, getDocs, serverTimestamp } from 'firebase/firestore';
 
 const KEYS = {
     RHYTHMS: 'strumflow_rhythms',
@@ -272,54 +272,45 @@ Rasguido (veya Rasgueado), flamenko gitarın en karakteristik tekniklerinden bir
     },
 ];
 
-// --- Rhythm CRUD ---
-function getStoredRhythms() {
-    try {
-        const data = localStorage.getItem(KEYS.RHYTHMS);
-        return data ? JSON.parse(data) : [];
-    } catch {
-        return [];
-    }
+// --- Rhythm CRUD (Firestore - herkese açık) ---
+function toISOSafe(ts) {
+    return ts?.toDate?.().toISOString() || new Date().toISOString();
 }
 
-function saveRhythms(rhythms) {
-    localStorage.setItem(KEYS.RHYTHMS, JSON.stringify(rhythms));
+export async function getAllRhythms() {
+    const q = query(collection(db, 'rhythms'), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data(), createdAt: toISOSafe(d.data().createdAt) }));
 }
 
-export function getAllRhythms() {
-    return getStoredRhythms();
-}
-
-export function searchRhythms(query) {
-    const q = query.toLowerCase().trim();
-    if (!q) return getStoredRhythms();
-    return getStoredRhythms().filter(
-        (r) =>
-            r.title.toLowerCase().includes(q) ||
-            r.chords.some((c) => c.name.toLowerCase().includes(q)) ||
-            (r.author && r.author.toLowerCase().includes(q))
+export async function searchRhythms(searchQuery) {
+    const rhythms = await getAllRhythms();
+    const q = searchQuery.toLowerCase().trim();
+    if (!q) return rhythms;
+    return rhythms.filter(r =>
+        r.title.toLowerCase().includes(q) ||
+        r.chords.some(c => c.name.toLowerCase().includes(q)) ||
+        (r.author && r.author.toLowerCase().includes(q))
     );
 }
 
-export function addRhythm(rhythm) {
-    const rhythms = getStoredRhythms();
-    const newRhythm = {
+export async function addRhythm(rhythm) {
+    const docRef = await addDoc(collection(db, 'rhythms'), {
         ...rhythm,
-        id: Date.now().toString(),
-        createdAt: new Date().toISOString(),
-    };
-    rhythms.unshift(newRhythm);
-    saveRhythms(rhythms);
-    return newRhythm;
+        createdAt: serverTimestamp(),
+    });
+    return { ...rhythm, id: docRef.id, createdAt: new Date().toISOString() };
 }
 
-export function getRhythmById(id) {
-    return getStoredRhythms().find((r) => r.id === id) || null;
+export async function getRhythmById(id) {
+    const snap = await getDoc(doc(db, 'rhythms', id));
+    if (!snap.exists()) return null;
+    const data = snap.data();
+    return { id: snap.id, ...data, createdAt: toISOSafe(data.createdAt) };
 }
 
-export function deleteRhythm(id) {
-    const rhythms = getStoredRhythms().filter((r) => r.id !== id);
-    saveRhythms(rhythms);
+export async function deleteRhythm(id) {
+    await deleteDoc(doc(db, 'rhythms', id));
 }
 
 // --- Comments CRUD ---

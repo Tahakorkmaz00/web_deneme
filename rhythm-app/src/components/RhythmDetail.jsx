@@ -8,7 +8,7 @@ export default function RhythmDetail({ rhythmId, user, onBack, onExercise, onDel
 
     useEffect(() => {
         if (rhythmId) {
-            setRhythm(getRhythmById(rhythmId));
+            getRhythmById(rhythmId).then(setRhythm);
         }
     }, [rhythmId]);
 
@@ -22,9 +22,9 @@ export default function RhythmDetail({ rhythmId, user, onBack, onExercise, onDel
         );
     }
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (window.confirm('Bu ritmi silmek istediğinize emin misiniz?')) {
-            deleteRhythm(rhythm.id);
+            await deleteRhythm(rhythm.id);
             onDeleted();
         }
     };

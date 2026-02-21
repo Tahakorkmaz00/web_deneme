@@ -1,26 +1,43 @@
 import { useState, useEffect } from 'react';
-import { getAllRhythms, searchRhythms } from '../utils/dataStore';
+import { db } from '../firebase';
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import './Library.css';
 
 export default function Library({ onNavigate, onBack, isLoggedIn, onRequestLogin }) {
+    const [allRhythms, setAllRhythms] = useState([]);
     const [rhythms, setRhythms] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setRhythms(getAllRhythms());
+        const q = query(collection(db, 'rhythms'), orderBy('createdAt', 'desc'));
+        const unsubscribe = onSnapshot(q, (snap) => {
+            const data = snap.docs.map(d => {
+                const d_ = d.data();
+                return {
+                    id: d.id,
+                    ...d_,
+                    createdAt: d_.createdAt?.toDate?.().toISOString() || new Date().toISOString()
+                };
+            });
+            setAllRhythms(data);
+            setLoading(false);
+        });
+        return () => unsubscribe();
     }, []);
 
     useEffect(() => {
         if (searchQuery.trim()) {
-            setRhythms(searchRhythms(searchQuery));
+            const q = searchQuery.toLowerCase();
+            setRhythms(allRhythms.filter(r =>
+                r.title.toLowerCase().includes(q) ||
+                r.chords.some(c => c.name.toLowerCase().includes(q)) ||
+                (r.author && r.author.toLowerCase().includes(q))
+            ));
         } else {
-            setRhythms(getAllRhythms());
+            setRhythms(allRhythms);
         }
-    }, [searchQuery]);
-
-    const refreshRhythms = () => {
-        setRhythms(searchQuery.trim() ? searchRhythms(searchQuery) : getAllRhythms());
-    };
+    }, [searchQuery, allRhythms]);
 
     const handleCreate = () => {
         if (!isLoggedIn) {
@@ -67,7 +84,12 @@ export default function Library({ onNavigate, onBack, isLoggedIn, onRequestLogin
 
                 {/* Rhythm List */}
                 <div className="rhythm-list">
-                    {rhythms.length === 0 ? (
+                    {loading ? (
+                        <div className="empty-library">
+                            <span className="empty-icon">⏳</span>
+                            <h3>Yükleniyor...</h3>
+                        </div>
+                    ) : rhythms.length === 0 ? (
                         <div className="empty-library">
                             <span className="empty-icon">🎵</span>
                             <h3>{searchQuery ? 'Sonuç bulunamadı' : 'Henüz ritim yok'}</h3>

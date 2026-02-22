@@ -124,7 +124,7 @@ export default function Exercise({ rhythm }) {
     }, []);
 
     const startMetronome = useCallback(() => {
-        const intervalMs = (60 / bpm) * 1000;
+        const intervalMs = (60 / bpm) * (4 / timeSig.division) * 1000;
         beatCountRef.current = 0;
         chordIdxRef.current = 0;
         setCurrentBeat(0);
@@ -298,9 +298,6 @@ export default function Exercise({ rhythm }) {
 
                                     return (
                                         <div key={index} className={cls}>
-                                            <span className="beat-symbol">
-                                                {symbol || (accentLevel === 'strong' ? '●' : accentLevel === 'medium' ? '◦' : '·')}
-                                            </span>
                                             <span className="beat-num">{index + 1}</span>
                                         </div>
                                     );
@@ -308,14 +305,6 @@ export default function Exercise({ rhythm }) {
                             </div>
                         ))}
                     </div>
-
-                    {/* Strum pattern reference */}
-                    {rhythm.strumPattern && (
-                        <div className="exercise-strum">
-                            <span className="strum-label">Kalıp:</span>
-                            <span className="strum-value">{rhythm.strumPattern}</span>
-                        </div>
-                    )}
 
                     {/* Controls */}
                     <div className="metronome-controls">
